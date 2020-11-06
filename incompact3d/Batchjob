@@ -1,0 +1,75 @@
+#!/bin/bash
+
+################-> are comments
+################-> "#PBS" are Batch Script commands
+
+#PBS -m abe
+
+################ Verbose mode
+
+#PBS -V
+
+################
+
+################ Change these parameters according to your requisites
+
+#PBS -l nodes=2:ppn=24:cluster-Plumes,walltime=48:00:00
+
+################ Where:
+################ nodes = number of nodes requested
+################ ppn = number of cores per node
+################ cluster-Atlantica / cluster-Gates = cluster name
+################ walltime = max allocation time
+
+################ Please, change this e-mail address to yours
+
+#PBS -M felipe.schuch@acad.pucrs.br
+
+################
+
+#PBS -r n
+
+################ Output options
+
+#PBS -j oe
+
+################
+
+################ Please, change this directory to your working dir.
+
+#PBS -d  /plumesarea/Felipe/
+
+################
+
+################
+echo Running on host `hostname`
+echo
+echo Initial Time is `date`
+echo
+echo Directory is `pwd`
+echo
+echo This jobs runs on the following nodes:
+echo `cat $PBS_NODEFILE | uniq > nodefile`
+echo
+echo JOB_ID:
+echo `echo $PBS_JOBID`
+echo ################
+
+###############################
+#cp /plumesarea/logger.sh ./   
+#./logger.sh > shell.out.log & 
+###############################
+source /usr/local/Intel_Cluster_Studio_XE_2017/intel-vars.sh
+
+export I_MPI_SHM_LMT=shm
+
+make clean
+
+make
+
+while ! find ./data/*; do sleep 5; mpirun --machinefile nodefile -np 192 ./incompact3d > log.out; done
+
+################
+
+echo Final Time is `date`
+

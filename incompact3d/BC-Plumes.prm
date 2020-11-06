@@ -1,0 +1,101 @@
+#
+# INCOMPACT 3D parameters - Plunging Plume configuration
+#
+2001   #nx
+241    #ny
+31     #nz
+3      #nphi
+0      #p_row
+0      #p_col
+#
+# INCOMPACT 3D Flow parameters
+#
+312.5  #xlx       # Lx (Adimensional size in x-direction)
+0.     #xlx_pi    # Physical domain start position (Adimensional size in x-direction)
+250.   #xlx_pf    # Physical domain end position (Adimensional size in x-direction)
+16.875 #yly       # Ly (Adimensional size in y-direction)
+4.     #zlz       # Lz (Adimensional size in z-direction)
+2500.  #re        # Reynolds number
+0.01   #dt        # Time step
+# ri              # Richardson number
+0.02354 0.0 0.03753
+# nsc             # Schmidt number
+1.00000 1.0 1.0
+# uset            # Part settling speed
+0.00000 0.0 0.001586
+#cp # Concentration
+1.00000 1.0 1.0
+#
+# INCOMPACT3D Flow configuration
+#
+0      #jLES       #LES Model (0:DNS, 1:iLES, 2:Explicit Simple Smagorinsky, 3:Explicit Wall-Adaptive LES, 4: Explicit Dynamic Smagorinsky LES)
+16.    #fpi2
+2      #nscheme    # Temporal scheme (1:AB2, 2:AB3, 3: RK3, 4:KN+AB3 (-DIMPLICIT flag required))
+2      #cont_phi   # Limit phi value?(0:no, 1:limit to 0, 2: limit to 0 and 1)
+#
+# INCOMPACT 3D Body (old school)
+#
+2      # ivirt # IBM? (0:no-IBM, 1: old school, 2: Lagrangian Poly)
+1.     # layer over the ramp                             [layer]
+0.     # horizontal position ramp at the inflow boundary [x0ramp]
+0.05   # slope declivity                                 [declramp]
+#
+# INCOMPACT 3D Forcing with Lagrangian Polynomials
+#
+1      # IBM with Lagrangian polynomials ? (0: no, 1: yes)                  [ilag]
+2      # The highest number of fluid-points at each boundary (0, 1, 2 or 3) [npif]
+1      # First fluid-point jump ? (0: no, 1: yes=advised)                   [izap]
+20     # nraf
+1      # nobjmax
+#
+# INCOMPACT 3D Post - Processing
+#
+250    # iprocessing # Frequency for statistics computation
+300000 # istat       #
+100    # itest       #
+#
+# INCOMPACT 3D File parameters
+#
+0      # ilit      # Read initial flow field? (0:no, 1:yes)
+1      # ifirst    # First iteration
+500000 # ilast     # Last iteration
+50000  # isave     # Frequency for writing backup file (sauve.dat)
+2500   # imodulo   # Frequency for visualization for VISU_INSTA
+#
+# INCOMPACT 3D parameters - Visualization - requires compilation flag -DVISU
+#
+1      #save_ux    # Save ux field to file? (0:no, 1:yes)
+1      #save_uy    # Save uy field to file? (0:no, 1:yes)
+1      #save_uz    # Save uz field to file? (0:no, 1:yes)
+1      #save_phi   # Save phi(1,2,3..) fields to file? (0:no, 1:yes)
+0      #save_uxm   # Save uy averaged field to file? (0:no, 1:yes)
+0      #save_uym   # Save uy averaged field to file? (0:no, 1:yes)
+0      #save_uzm   # Save uz averaged field to file? (0:no, 1:yes)
+0      #save_phim  # Save phi averaged (1,2,3..) fields to file? (0:no, 1:yes)
+0      #save_pre   # Save pressure field to file? (0:no, 1:yes)
+0      #save_prem  # Save pressure averaged field to file? (0:no, 1:yes)
+1      #save_ibm   # Save IBM field to file? (0:no, 1:yes, to save just ibm0000, 2:yes, to save every snapshot)
+#
+# Extra Visualization - requires compilation flag -DVISUEXTRA
+#
+0      #save_w     # Save vorticity field to file? (0:no, 1:yes)
+0      #save_w1    # Save vorticity 1 field to file? (0:no, 1:yes)
+0      #save_w2    # Save vorticity 2 field to file? (0:no, 1:yes)
+0      #save_w3    # Save vorticity 3 field to file? (0:no, 1:yes)
+0      #save_qc    # Save Q-criteria field to file? (0:no, 1:yes)
+0      #save_pc    # Save P-criteria field to file? (0:no, 1:yes)
+0      #save_V     # Save P-criteria field to file? (0:no, 1:yes)
+0      #save_dudx  #
+0      #save_dudy  #
+0      #save_dudz  #
+0      #save_dvdx  #
+0      #save_dvdy  #
+0      #save_dvdz  #
+0      #save_dwdx  #
+0      #save_dwdy  #
+0      #save_dwdz  #
+0      #save_dphidx#
+0      #save_dphidy#
+0      #save_dphidz#
+0      #save_dmap  # Save deposit map? (0:no, 1:yes)
+0      #save_tmap  # Save tau wall map? (0:no, 1:yes)
