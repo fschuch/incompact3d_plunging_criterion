@@ -17,7 +17,7 @@ i3d_CMP = gcc#intel,gcc
 i3d_FFT = generic#mkl,generic,fftw3_f03,fftw3
 ```
 
-It can also be done with environment variables, for instance, setting then at the `~/.bashrc` file:
+It can also be done with environment variables, for instance, setting them at the `~/.bashrc` file:
 ```
 export i3d_FLOW_TYPE="Plumes"
 export i3d_LCL="local"
