@@ -14,4 +14,4 @@ This repository will contain the source code and the mathematical description of
 > *School of Technology, Pontifical Catholic University of Rio Grande do Sul, Porto Alegre, Brazil.*  
 > jorgehs@pucrs.br
 
-Submited to Computers & Geosciences.
+**Submitted to Computers & Geosciences. Source code, numerical description, and Jupyter Notebooks for data processing will be included in this repository once the paper is accepted for publication.**
