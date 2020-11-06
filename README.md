@@ -1,6 +1,6 @@
 # Incompact3d - Plunging Criterion
 
-This repository will contain the source code employed for our work **"Plunging condition for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations"**, by:
+This repository will contain the source code and the mathematical description of the computational employed for our work **"Plunging condition for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations"**, by:
 
 > **Felipe Nornberg Schuch**  
 > *School of Technology, Pontifical Catholic University of Rio Grande do Sul, Porto Alegre, Brazil.*  
