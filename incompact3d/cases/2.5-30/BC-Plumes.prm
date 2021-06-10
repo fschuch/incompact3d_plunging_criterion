@@ -1,0 +1,110 @@
+#
+# INCOMPACT 3D parameters - Plunging Plume configuration - ILES-Graph/S0250/us0
+#
+#
+nx    1081
+ny    73
+nz    32
+nphi  1
+p_row 0
+p_col 0
+#
+# INCOMPACT 3D Flow parameters
+#
+xlx    337.5  # Lx (Adimensional size in x-direction)
+xlx_pi 25.    # Physical domain start position (Adimensional size in x-direction)
+xlx_pf 275.   # Physical domain end position (Adimensional size in x-direction)
+yly    10.125 # Ly (Adimensional size in y-direction)
+zlz    8.0    # Lz (Adimensional size in z-direction)
+re     2500.  # Reynolds number
+dt     0.0125 # Time step
+#
+sponge_type  1  #(0: none, 1: prescribed, 2: read from a file)
+sponge_type2 3
+sponge_xref  325.
+sponge_nt    3000
+iin          1
+noise        0.00
+noise1       0.01
+#
+phi_type 1                   # (1: particle-laden, 2: ambient fluid, 3: Numerical dye)
+ri       0.0722647759338426  # Richardson number
+uset     0.003               # Part settling speed
+cp       1.0                 # Concentration
+#
+nclz1  0 #Boundary condition in z=0  (0: Periodic, 1:Free-slip, 2: Dirichlet)
+nclzn  0 #Boundary condition in z=Lz (0: Periodic, 1:Free-slip, 2: Dirichlet)
+nclzS1 0 #Boundary condition in z=0  (0: Periodic, 1:No-flux, 2: Dirichlet)
+nclzSn 0 #Boundary condition in z=Lz (0: Periodic, 1:No-flux, 2: Dirichlet)
+#
+# INCOMPACT3D Flow configuration
+#
+jLES     1  #LES Model (0:DNS, 1:iLES, 2:Explicit Simple Smagorinsky, 3:Explicit Wall-Adaptive LES, 4: Explicit Dynamic Smagorinsky LES)
+fpi2     16.
+nscheme  2  # Temporal scheme (1:AB2, 2:AB3, 3: RK3, 4:KN+AB3 (-DIMPLICIT flag required))
+cont_phi 2  # Limit phi value?(0:no, 1:limit to 0, 2: limit to 0 and 1)
+#
+# INCOMPACT 3D Body (old school)
+#
+ivirt    2    # IBM? (0:no-IBM, 1: old school, 2: Lagrangian Poly)
+layer    1.6875 # layer over the ramp
+x0ramp   25.0 # horizontal position ramp at the inflow boundary
+declramp 0.025 # slope declivity
+#
+# INCOMPACT 3D Forcing with Lagrangian Polynomials
+#
+ilag    1  # IBM with Lagrangian polynomials ? (0: no, 1: yes)
+npif    2  # The highest number of fluid-points at each boundary (0, 1, 2 or 3)
+izap    1  # First fluid-point jump ? (0: no, 1: yes=advised)
+nraf    20
+nobjmax 1
+#
+# INCOMPACT 3D Post - Processing
+#
+iprocessing 200    # Frequency for statistics computation
+itest       200
+#
+# INCOMPACT 3D File parameters
+#
+ilit    0      # Read initial flow field? (0:no, 1:yes)
+ifirst  1      # First iteration
+ilast   320000 # Last iteration
+isave   32000  # Frequency for writing backup file (sauve.dat)
+imodulo 2000   # Frequency for visualization for VISU_INSTA
+initstats1 8000
+#
+# INCOMPACT 3D parameters - Visualization - requires compilation flag -DVISU
+#
+save_ux     1 # Save ux field to file? (0:no, 1:yes)
+save_uy     1 # Save uy field to file? (0:no, 1:yes)
+save_uz     1 # Save uz field to file? (0:no, 1:yes)
+save_phi    1 # Save phi(1,2,3..) fields to file? (0:no, 1:yes)
+save_uxm    0 # Save uy averaged field to file? (0:no, 1:yes)
+save_uym    0 # Save uy averaged field to file? (0:no, 1:yes)
+save_uzm    0 # Save uz averaged field to file? (0:no, 1:yes)
+save_phim   0 # Save phi averaged (1,2,3..) fields to file? (0:no, 1:yes)
+save_pre    0 # Save pressure field to file? (0:no, 1:yes)
+save_prem   0 # Save pressure averaged field to file? (0:no, 1:yes)
+save_ibm    1 # Save IBM field to file? (0:no, 1:yes, to save just ibm0000, 2:yes, to save every snapshot)
+#
+# Extra Visualization - requires compilation flag -DVISUEXTRA
+#
+save_w      0 # Save vorticity field to file? (0:no, 1:yes)
+save_w1     0 # Save vorticity 1 field to file? (0:no, 1:yes)
+save_w2     0 # Save vorticity 2 field to file? (0:no, 1:yes)
+save_w3     0 # Save vorticity 3 field to file? (0:no, 1:yes)
+save_qc     0 # Save Q-criteria field to file? (0:no, 1:yes)
+save_pc     0 # Save P-criteria field to file? (0:no, 1:yes)
+save_V      0 # Save P-criteria field to file? (0:no, 1:yes)
+save_dudx   0
+save_dudy   0
+save_dudz   0
+save_dvdx   0
+save_dvdy   0
+save_dvdz   0
+save_dwdx   0
+save_dwdy   0
+save_dwdz   0
+save_dphidx 0
+save_dphidy 0
+save_dphidz 0
