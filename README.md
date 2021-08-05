@@ -1,6 +1,6 @@
 # Plunging condition for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations
 
-This repository contains the source code employed for our work **"Plunging condition for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations"** (accepted for publication at Computers & Geosciences), by:
+This repository contains the source code employed for our work **"Plunging condition for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations"** (Computers & Geosciences, 2021), by:
 
 > **Felipe Nornberg Schuch**  
 > *School of Technology, Pontifical Catholic University of Rio Grande do Sul, Porto Alegre, Brazil.*  
