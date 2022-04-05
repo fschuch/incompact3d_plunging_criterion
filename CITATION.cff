@@ -16,13 +16,13 @@ url: "https://github.com/fschuch/incompact3d_plunging_criterion"
 preferred-citation:
   type: article
   authors:
-    - family-names: "N Schuch"
+    - family-names: "Schuch"
       given-names: "Felipe"
       orcid: "https://orcid.org/0000-0002-6140-0273"
     - family-names: "Meiburg"
       given-names: "Eckart"
       orcid: "https://orcid.org/0000-0003-3670-8193"
-    - family-names: "H Silvestrini"
+    - family-names: "Silvestrini"
       given-names: "Jorge"
       orcid: "https://orcid.org/0000-0001-9929-9302"
   doi: "10.1016/j.cageo.2021.104880"
