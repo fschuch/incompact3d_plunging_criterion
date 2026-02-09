@@ -200,7 +200,7 @@ if (nrank==0) print *,'--SEMI IMPLICIT CODE (IN BETA)-------------------'
      if (mod(itime,imodulo).eq.0) then
        call ft_parameter(2)
 #ifdef VISU
-       call VISU_INSTA (ux1,uy1,uz1,phi1,ep1,.false.)
+       call VISU_INSTA (ux1,uy1,uz1,phi1,ep1,diss1,.false.)
 
        if (save_pre.eq.1.OR.save_prem.eq.1) call VISU_PRE (pp3,ta1,tb1,di1,&
        ta2,tb2,di2,ta3,di3,nxmsize,nymsize,nzmsize,phG,ph2,ph3,uvisu,pre1)
