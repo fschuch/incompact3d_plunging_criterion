@@ -68,7 +68,7 @@ FFLAGS = -cpp -O3 -funroll-loops -floop-optimize -g -Warray-bounds -fcray-pointe
 endif
 
 ### List of files for the main code
-SRC = decomp_2d.f90 glassman.f90 fft_$(i3d_FFT).f90 module_param.f90 var.f90 io.f90 poisson.f90 schemes.f90 BC-$(i3d_FLOW_TYPE).f90 energy.f90 convdiff.f90 navier.f90 derive.f90 parameters.f90 lagpol-phi.f90 genepsi3d.f90 filter.f90 les_models.f90 incompact3d.f90
+SRC = decomp_2d.f90 glassman.f90 fft_$(i3d_FFT).f90 module_param.f90 var.f90 io.f90 poisson.f90 schemes.f90 BC-$(i3d_FLOW_TYPE).f90 energy.f90 convdiff.f90 navier.f90 derive.f90 parameters.f90 lagpol-phi.f90 genepsi3d.f90 filter.f90 les_models.f90 interpolation_stubs.f90 incompact3d.f90
 
 ### List of files for the post-processing code
 PSRC = decomp_2d.f90 module_param.f90 io.f90 variables.f90 schemes.f90 BC-$(i3d_FLOW_TYPE).f90 energy.f90 derive.f90 parameters.f90 lagpol-phi.f90 tools.f90 visu.f90 paraview.f90 post.f90

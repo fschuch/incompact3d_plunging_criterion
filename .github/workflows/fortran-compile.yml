@@ -1,0 +1,33 @@
+name: Fortran Compilation Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gfortran libopenmpi-dev openmpi-bin
+    
+    - name: Build Fortran application
+      run: |
+        cd incompact3d
+        make clean
+        make
+    
+    - name: Check executable
+      run: |
+        cd incompact3d
+        ls -lh incompact3d
+        file incompact3d
+        echo "✅ Fortran application compiled successfully!"
