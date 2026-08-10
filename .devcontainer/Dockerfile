@@ -14,7 +14,20 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
         gdb \
         less \
         ca-certificates \
+        sudo \
+        software-properties-common \
     && rm -rf /var/lib/apt/lists/*
+
+# Apptainer (from the official PPA: has amd64 and arm64 builds), so the
+# apptainer/incompact3d.def image can be built and tested inside the dev
+# container. Building a .sif needs privileges: the devcontainer runs with
+# --privileged (see devcontainer.json) and the ubuntu user gets passwordless
+# sudo, mirroring the CI runner (sudo apptainer build ...).
+RUN add-apt-repository -y ppa:apptainer/ppa \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends apptainer \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu
 
 # Allow mpirun as root inside the container (handy when the container user is root)
 ENV OMPI_ALLOW_RUN_AS_ROOT=1 \

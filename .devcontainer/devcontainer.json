@@ -4,6 +4,9 @@
     "dockerfile": "Dockerfile"
   },
   "remoteUser": "ubuntu",
+  "runArgs": [
+    "--privileged"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [

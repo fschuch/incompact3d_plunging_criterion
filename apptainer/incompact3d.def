@@ -32,12 +32,18 @@ From: ubuntu:24.04
     rm -rf /var/lib/apt/lists/*
 
     cd /opt/incompact3d-src
-    # Override the Makefile's gcc FFLAGS: drop -march=native (not portable in
-    # a distributed image) and add -fallow-argument-mismatch, required by
-    # gfortran >= 10 for this legacy Fortran code.
+    # Override the Makefile's gcc FFLAGS: replace -march=native (not portable
+    # in a distributed image) with the baseline ISA of the build architecture.
+    # x86-64 is what CI publishes; other architectures (e.g. building locally
+    # on an arm64 machine) fall back to the compiler default.
+    if [ "$(uname -m)" = "x86_64" ]; then
+        ARCH_FLAGS="-march=x86-64 -mtune=generic"
+    else
+        ARCH_FLAGS=""
+    fi
     make clean
     make i3d_CMP=gcc i3d_FFT=generic i3d_FLOW_TYPE=Plumes \
-        FFLAGS="-cpp -O3 -funroll-loops -floop-optimize -g -Warray-bounds -fcray-pointer -fbacktrace -march=x86-64 -mtune=generic -ffree-line-length-none -fallow-argument-mismatch"
+        FFLAGS="-cpp -O3 -funroll-loops -floop-optimize -g -Warray-bounds -fcray-pointer -fbacktrace $ARCH_FLAGS -ffree-line-length-none -fallow-argument-mismatch"
 
     mkdir -p /opt/incompact3d/bin
     cp incompact3d /opt/incompact3d/bin/

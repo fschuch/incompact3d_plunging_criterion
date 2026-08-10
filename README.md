@@ -118,12 +118,18 @@ jupyter lab
 
 Two container options are provided to build and run the Fortran solver without installing its toolchain (gfortran, OpenMPI, make) on the host system:
 
-* **Dev container** ([.devcontainer](./.devcontainer)): open the repository in VS Code (or any Dev Containers-compatible tool) and choose *Reopen in Container*. Then build and run the solver with:
+* **Dev container** ([.devcontainer](./.devcontainer)): open the repository in VS Code (or any Dev Containers-compatible tool) and choose *Reopen in Container*. It ships the full toolchain (gfortran, OpenMPI, FFTW) plus Apptainer itself. Then, from the repository root:
 ```bash
-cd incompact3d && make
+make solver     # build the Fortran solver (same as: make -C incompact3d)
+```
+```bash
+make sif        # build the Apptainer image (incompact3d.sif, uses sudo)
+```
+```bash
+make smoke-test # run a quick 5-iteration verification case on 2 MPI ranks
 ```
 
-* **Apptainer** ([apptainer/incompact3d.def](./apptainer/incompact3d.def)): a self-contained image with the compiled solver and its own OpenMPI. Build it with `apptainer build incompact3d.sif apptainer/incompact3d.def`, or pull the image published by CI (on tagged releases) with:
+* **Apptainer** ([apptainer/incompact3d.def](./apptainer/incompact3d.def)): a self-contained image with the compiled solver and its own OpenMPI. Build it with `make sif` (works inside the dev container or on any Linux machine with Apptainer), or pull the image published by CI (on tagged releases) with:
 ```bash
 apptainer pull oras://ghcr.io/fschuch/incompact3d_plunging_criterion:latest
 ```
@@ -135,6 +141,7 @@ apptainer exec incompact3d.sif mpirun -np 4 incompact3d -i BC-Plumes.prm
 ```bash
 mpirun -np 128 apptainer exec incompact3d.sif incompact3d -i BC-Plumes.prm
 ```
+  Note: when Apptainer itself runs inside a Docker container (as in the dev container), add `--unsquash` to `apptainer exec` — a FUSE limitation prevents executing binaries from the mounted image otherwise. `make smoke-test` already does this; it is harmless on regular hosts.
 
 The GitHub Actions workflow [apptainer.yml](./.github/workflows/apptainer.yml) builds the image, runs a short smoke-test simulation ([cases/smoke-test](./incompact3d/cases/smoke-test)) on 2 MPI ranks, and publishes the image to the GitHub Container Registry on version tags (`v*`). In compliance with the GPL-3.0 license, the image also carries the full solver source code at `/opt/incompact3d-src`.
 

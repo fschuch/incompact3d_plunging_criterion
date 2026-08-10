@@ -35,6 +35,11 @@
 
 # Containers
 *.sif
+/smoke-test-run/
+
+# Simulation Data
+/data/
+
 
 # macOS
 .DS_Store
