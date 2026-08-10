@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+/incompact3d/incompact3d
+/incompact3d/post
+
+# Containers
+*.sif
+
+# macOS
+.DS_Store

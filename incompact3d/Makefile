@@ -64,7 +64,8 @@ endif
 else ifeq ($(i3d_CMP),gcc)
 FC = mpif90
 #FFLAGS = -O3 -funroll-loops -floop-optimize -g -Warray-bounds -fcray-pointer -x f95-cpp-input
-FFLAGS = -cpp -O3 -funroll-loops -floop-optimize -g -Warray-bounds -fcray-pointer -fbacktrace -march=native -ffree-line-length-none
+# -fallow-argument-mismatch is required by gfortran >= 10 for this legacy code
+FFLAGS = -cpp -O3 -funroll-loops -floop-optimize -g -Warray-bounds -fcray-pointer -fbacktrace -march=native -ffree-line-length-none -fallow-argument-mismatch
 endif
 
 ### List of files for the main code
@@ -113,6 +114,7 @@ else ifeq ($(FFT),fftw3_f03)
   INC=-I$(FFTW3_PATH)/include
   LIBFFT=-L$(FFTW3_PATH)/lib -lfftw3 -lfftw3f
 else ifeq ($(i3d_FFT),generic)
+  SRC := decomp_2d.f90 glassman.f90 $(filter-out decomp_2d.f90,$(SRC))
   INC=
   LIBFFT=
 endif

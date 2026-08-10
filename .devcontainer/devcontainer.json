@@ -1,0 +1,15 @@
+{
+  "name": "incompact3d-plunging-criterion",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "ubuntu",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "fortran-lang.linter-gfortran"
+      ]
+    }
+  },
+  "postCreateCommand": "gfortran --version && mpif90 --version"
+}

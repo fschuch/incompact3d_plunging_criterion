@@ -9,14 +9,12 @@ subroutine subparaview(nx, ny, nz, io, num, filename, label)
   integer, intent(in) :: nx, ny, nz, io
   character(len=*), intent(in) :: num
   character(len=*), intent(in) :: filename
-  character(len=*), intent(IN), optional :: label
+  ! label used to be optional, but that requires an explicit interface at
+  ! every call site; all callers pass it anyway
+  character(len=*), intent(IN) :: label
   character(60) :: filelabel
 
-  if (present(label)) then
-    filelabel = label
-  else
-    filelabel = filename
-  endif
+  filelabel = label
 
   ! write(*,*) nx
   ! write(*,*) ny
