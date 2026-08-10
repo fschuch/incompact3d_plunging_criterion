@@ -31,6 +31,12 @@ DEFS = -DVISU -DVERSION=\"$(GIT_VERSION)\"
 #export i3d_CMP="intel"
 #export i3d_FFT="mkl"
 
+#######Default settings for gfortran compatibility###########
+# Set defaults if not specified, for better compatibility with legacy codebase
+i3d_CMP ?= gcc
+i3d_FFT ?= generic
+i3d_FLOW_TYPE ?= Plumes
+
 #######Minimum defs###########
 ifeq ($(i3d_FLOW_TYPE),Channel-flow)
 DEFS2 = -DSTRETCHING -DPOST
