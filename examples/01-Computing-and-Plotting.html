@@ -1,0 +1,2460 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Computing and Plotting &#8212; Plunging condition for particle-laden flows over sloping bottoms</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7b8bda07" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/01-Computing-and-Plotting';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Navier-Stokes Solver" href="../running/solver.html" />
+    <link rel="prev" title="Layer-Averaged Quantities and Conversion to NetCDF" href="00-LA-and-Convert-to-NetCDF.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Plunging condition for particle-laden flows over sloping bottoms - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Plunging condition for particle-laden flows over sloping bottoms - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://doi.org/10.1016/j.cageo.2021.104880" title="Article" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://zenodo.org/badge/DOI/10.1016/j.cageo.2021.104880.svg" class="icon-link-image" alt="Article"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://doi.org/10.5281/zenodo.4044388" title="Dataset" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4044388.svg" class="icon-link-image" alt="Dataset"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Methodology</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../methodology/governing-equations.html">Governing Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methodology/computational-domain.html">Computational Domain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methodology/numerical-methods.html">Numerical Methodology</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dataset</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../dataset/description.html">Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-LA-and-Convert-to-NetCDF.html">Layer-Averaged Quantities and Conversion to NetCDF</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Computing and Plotting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Running the Solver</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../running/solver.html">Navier-Stokes Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/containers.html">Containers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../references/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/building-the-docs.html">Building these Docs</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/examples/01-Computing-and-Plotting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Computing and Plotting</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-averaged-quantities">Layer-averaged quantities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other">Other</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-evolution">Flow evolution</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="computing-and-plotting">
+<h1>Computing and Plotting<a class="headerlink" href="#computing-and-plotting" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Text provided under a Creative Commons Attribution license, CC-BY. All code is made available under the FSF-approved BSD-3 license.<br>
+Copyright (c) 2020, Felipe N. Schuch.<br>
+<a class="reference external" href="https://twitter.com/fschuch">&#64;fschuch</a></p>
+</div></blockquote>
+<section id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.notebook</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span> <span class="k">as</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dask.array</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">da</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://dask.org/">Dask</a> provides support for parallel computing and larger-than-memory arrays, both features are very useful for this application. For further information, see <a class="reference external" href="https://docs.dask.org/en/latest/">Dask’s Documentation</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">dask</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask.distributed</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\felip\anaconda3\lib\site-packages\distributed\node.py:155: UserWarning: Port 8787 is already in use.
+Perhaps you already have a cluster running?
+Hosting the HTTP server on port 62711 instead
+  http_address[&quot;port&quot;], self.http_server.port
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cases</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">us</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="s2">&quot;1.25 2.5 5.0 10.0&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">us</span> <span class="ow">in</span> <span class="s2">&quot;0 15 30&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="layer-averaged-quantities">
+<h2>Layer-averaged quantities<a class="headerlink" href="#layer-averaged-quantities" title="Link to this heading">#</a></h2>
+<p>The complete spatio-temporal analysis of the relevant quantities is possible in a layer averaged context per width unit, that is computed according to the equations</p>
+<div class="math notranslate nohighlight">
+\[
+Uh(x_1,t) = \dfrac{1}{L_3} \int_0^{L_3} \int_{x_{2r}}^{x_{2i}} u_1(x_1,x_2,x_3,t) ~ dx_2 dx_3
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+U^2h(x_1,t) = \dfrac{1}{L_3} \int_0^{L_3} \int_{x_{2r}}^{x_{2i}} \big( u_1(x_1,x_2,x_3,t) \big)^2 ~ dx_2 dx_3
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+UCh(x_1,t) = \dfrac{1}{L_3} \int_0^{L_3} \int_{x_{2r}}^{x_{2i}} u_1 (x_1,x_2,x_3,t) ~ c_t (x_1,x_2,x_3,t) ~ dx_2 dx_3
+\]</div>
+<p>For the vertical integration, <span class="math notranslate nohighlight">\(x_{2r}\)</span> represents the bed position and <span class="math notranslate nohighlight">\(x_{2i}\)</span> represents the interface between the underflow turbidity current and the ambient fluid, considered in this work as the position where <span class="math notranslate nohighlight">\(u_1 \times c_t = 0.005\)</span>. This step has been done in the previous example (see <a class="reference internal" href="00-LA-and-Convert-to-NetCDF.html"><span class="std std-doc">00-LA-and-Convert-to-NetCDF.ipynb</span></a>), the datasets are available at <a class="reference external" href="https://doi.org/10.5281/zenodo.4044388">Zenodo</a>. After downloading them, the files for all cases can be loaded and concatenate in a single variable using:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;LA-case-</span><span class="si">{</span><span class="n">case</span><span class="si">}</span><span class="s2">.nc&quot;</span> <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">cases</span><span class="p">]</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">concat_dim</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s2">&quot;nested&quot;</span><span class="p">,</span> <span class="n">compat</span> <span class="o">=</span> <span class="s2">&quot;no_conflicts&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">({</span><span class="s2">&quot;case&quot;</span><span class="p">:</span> <span class="n">cases</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\felip\anaconda3\lib\site-packages\xarray\core\alignment.py:307: FutureWarning: Index.__or__ operating as a set operation is deprecated, in the future this will be a logical operation matching Series.__or__.  Use index.union(other) instead
+  index = joiner(matching_indexes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can show in the screen all the variables in the <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt, dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:  (case: 12, t: 1601, x: 801, y: 241)
+Coordinates:
+  * t        (t) float64 0.0 2.5 5.0 7.5 ... 3.992e+03 3.995e+03 3.998e+03 4e+03
+  * y        (y) float64 0.0 0.1406 0.2812 0.4219 ... 33.33 33.47 33.61 33.75
+  * x        (x) float32 0.0 0.3125 0.625 0.9375 ... 249.375 249.6875 250.0
+  * case     (case) &lt;U7 &#x27;1.25-0&#x27; &#x27;1.25-15&#x27; &#x27;1.25-30&#x27; ... &#x27;10.0-15&#x27; &#x27;10.0-30&#x27;
+Data variables:
+    utau     (case, t, x) float32 0.06382665 0.001508435 ... 0.011865777
+    dep      (case, t, x) float32 0.0 0.0 0.0 ... 0.0022130858 0.0022131822
+    uset     (case) float64 0.0 0.0015 0.003 0.0 ... 0.003 0.0 0.0015 0.003
+    Ri0      (case) float64 0.2078 0.2602 0.3259 ... 0.001206 0.00151 0.001891
+    Fr0      (case) float64 2.194 1.96 1.752 4.659 ... 8.905 28.8 25.74 23.0
+    Re       (case) float64 2.5e+03 2.5e+03 2.5e+03 ... 2.5e+03 2.5e+03 2.5e+03
+    S        (case) float64 0.0125 0.0125 0.0125 0.025 ... 0.05 0.1 0.1 0.1
+    Uh       (case, t, x) float32 -0.0 -0.0 -0.0 ... 0.5849177 0.58932585
+    U2h      (case, t, x) float32 -0.0 -0.0 -0.0 ... 0.10806271 0.108770296
+    UCh      (case, t, x) float32 -0.0 -0.0 -0.0 ... 0.26402205 0.26640958
+Attributes:
+    title:    Plunging condition for particle-laden flows over sloping bottom...
+    authors:  F. N. Schuch, E. Meiburg &amp; J. H. Silvestrini
+    url:      https://github.com/fschuch/incompact3d_plunging_criterion
+    doi:      10.5281/zenodo.4044388
+    license:  Creative Commons Attribution 4.0 International</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ae9834b4-c4d3-4551-bc28-b0df159ed9c0' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ae9834b4-c4d3-4551-bc28-b0df159ed9c0' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>case</span>: 12</li><li><span class='xr-has-index'>t</span>: 1601</li><li><span class='xr-has-index'>x</span>: 801</li><li><span class='xr-has-index'>y</span>: 241</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-fdab7d19-ab7a-436e-8fe1-ac4dff74c756' class='xr-section-summary-in' type='checkbox'  checked><label for='section-fdab7d19-ab7a-436e-8fe1-ac4dff74c756' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>t</span></div><div class='xr-var-dims'>(t)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 2.5 5.0 ... 3.998e+03 4e+03</div><input id='attrs-4e72a6b4-2ee1-4291-a7ca-ec8635bc5cf6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4e72a6b4-2ee1-4291-a7ca-ec8635bc5cf6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2c3866d2-9e05-426c-a3fe-6eeb144409f5' class='xr-var-data-in' type='checkbox'><label for='data-2c3866d2-9e05-426c-a3fe-6eeb144409f5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>$t$</dd></dl></div><div class='xr-var-data'><pre>array([0.0000e+00, 2.5000e+00, 5.0000e+00, ..., 3.9950e+03, 3.9975e+03,
+       4.0000e+03])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.1406 0.2812 ... 33.61 33.75</div><input id='attrs-2d0bd05b-2728-47f8-aacd-902704eb9fdb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2d0bd05b-2728-47f8-aacd-902704eb9fdb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e73c1061-b31d-435b-b90e-abd300ee3f3e' class='xr-var-data-in' type='checkbox'><label for='data-e73c1061-b31d-435b-b90e-abd300ee3f3e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Vertical coordinate</dd><dt><span>long_name :</span></dt><dd>$x_2$</dd></dl></div><div class='xr-var-data'><pre>array([ 0.      ,  0.140625,  0.28125 , ..., 33.46875 , 33.609375, 33.75    ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.3125 0.625 ... 249.6875 250.0</div><input id='attrs-b2ca7cce-f88a-4833-8d11-cf83d0c7b3ce' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b2ca7cce-f88a-4833-8d11-cf83d0c7b3ce' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-48a357a0-9d5a-4159-95fd-72600ba7f04e' class='xr-var-data-in' type='checkbox'><label for='data-48a357a0-9d5a-4159-95fd-72600ba7f04e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Streamwise coordinate</dd><dt><span>long_name :</span></dt><dd>$x_1$</dd></dl></div><div class='xr-var-data'><pre>array([  0.    ,   0.3125,   0.625 , ..., 249.375 , 249.6875, 250.    ],
+      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>case</span></div><div class='xr-var-dims'>(case)</div><div class='xr-var-dtype'>&lt;U7</div><div class='xr-var-preview xr-preview'>&#x27;1.25-0&#x27; &#x27;1.25-15&#x27; ... &#x27;10.0-30&#x27;</div><input id='attrs-e31a3782-6ab7-4087-8d3c-76149f270fae' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e31a3782-6ab7-4087-8d3c-76149f270fae' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ad33d0ad-e9e0-4914-93e4-81eb3da534cd' class='xr-var-data-in' type='checkbox'><label for='data-ad33d0ad-e9e0-4914-93e4-81eb3da534cd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;1.25-0&#x27;, &#x27;1.25-15&#x27;, &#x27;1.25-30&#x27;, &#x27;2.5-0&#x27;, &#x27;2.5-15&#x27;, &#x27;2.5-30&#x27;, &#x27;5.0-0&#x27;,
+       &#x27;5.0-15&#x27;, &#x27;5.0-30&#x27;, &#x27;10.0-0&#x27;, &#x27;10.0-15&#x27;, &#x27;10.0-30&#x27;], dtype=&#x27;&lt;U7&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cab2359d-3a99-4a1d-9b22-3919e23437f0' class='xr-section-summary-in' type='checkbox'  checked><label for='section-cab2359d-3a99-4a1d-9b22-3919e23437f0' class='xr-section-summary' >Data variables: <span>(10)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>utau</span></div><div class='xr-var-dims'>(case, t, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.06382665 ... 0.011865777</div><input id='attrs-001ac357-2956-4c01-9d67-5d332597f99b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-001ac357-2956-4c01-9d67-5d332597f99b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-42cf0026-4dd8-4534-a5d2-84129a1cdbf7' class='xr-var-data-in' type='checkbox'><label for='data-42cf0026-4dd8-4534-a5d2-84129a1cdbf7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0.06382665, 0.00150844, 0.00084333, ..., 0.        ,
+         0.        , 0.        ],
+        [0.06345132, 0.06517019, 0.06441021, ..., 0.03203802,
+         0.03106774, 0.03128436],
+        [0.06073542, 0.06201637, 0.06094021, ..., 0.03062732,
+         0.0297499 , 0.02999633],
+        ...,
+        [0.05869074, 0.05710623, 0.05597614, ..., 0.03981794,
+         0.03917977, 0.03995517],
+        [0.05547831, 0.05602942, 0.05455146, ..., 0.03979241,
+         0.03912866, 0.03988439],
+        [0.05620388, 0.05551916, 0.05554013, ..., 0.03995048,
+         0.03926276, 0.03999171]],
+
+       [[0.063821  , 0.00150788, 0.00084314, ..., 0.        ,
+         0.        , 0.        ],
+        [0.06353051, 0.06534258, 0.06462852, ..., 0.03203872,
+         0.03106824, 0.03128506],
+        [0.06084032, 0.06214596, 0.06110833, ..., 0.03062764,
+         0.02975012, 0.02999641],
+...
+        [0.05882059, 0.05280997, 0.04818242, ..., 0.01106048,
+         0.01099803, 0.01119303],
+        [0.05649588, 0.05397425, 0.04918334, ..., 0.01126295,
+         0.01118003, 0.01136846],
+        [0.05875145, 0.05336043, 0.0481012 , ..., 0.01151283,
+         0.01139184, 0.01156717]],
+
+       [[0.06409272, 0.0032504 , 0.00125141, ..., 0.        ,
+         0.        , 0.        ],
+        [0.06277934, 0.05896727, 0.05419021, ..., 0.01155578,
+         0.01088506, 0.01077082],
+        [0.06081339, 0.05688867, 0.05173524, ..., 0.01091918,
+         0.01047596, 0.0102708 ],
+        ...,
+        [0.05645465, 0.05353395, 0.04881621, ..., 0.01142215,
+         0.01148973, 0.01184526],
+        [0.05764302, 0.05402889, 0.0477308 , ..., 0.01146009,
+         0.01151322, 0.01185982],
+        [0.05961011, 0.05546807, 0.0498011 , ..., 0.01149452,
+         0.01153256, 0.01186578]]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dep</span></div><div class='xr-var-dims'>(case, t, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 ... 0.0022131822</div><input id='attrs-c59309b7-db2b-4ba6-b272-15d96380b4bb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c59309b7-db2b-4ba6-b272-15d96380b4bb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-df771ac9-0eb0-439f-b533-68793dade7c5' class='xr-var-data-in' type='checkbox'><label for='data-df771ac9-0eb0-439f-b533-68793dade7c5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Deposition rate</dd><dt><span>long_name :</span></dt><dd>$\dot{D}$</dd></dl></div><div class='xr-var-data'><pre>array([[[0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ],
+        [0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ],
+        [0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ],
+        ...,
+        [0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ],
+        [0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ],
+        [0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ]],
+
+       [[0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ],
+        [0.00157904, 0.00157476, 0.00157745, ..., 0.        ,
+         0.        , 0.        ],
+        [0.00157904, 0.00157904, 0.00157728, ..., 0.        ,
+         0.        , 0.        ],
+...
+        [0.00157904, 0.00157897, 0.00157893, ..., 0.00123372,
+         0.00123342, 0.00123343],
+        [0.00157904, 0.00157899, 0.00157897, ..., 0.00123391,
+         0.00123362, 0.00123365],
+        [0.00157904, 0.00157899, 0.00157884, ..., 0.00123406,
+         0.00123372, 0.00123372]],
+
+       [[0.        , 0.        , 0.        , ..., 0.        ,
+         0.        , 0.        ],
+        [0.00311148, 0.00311168, 0.00305984, ..., 0.        ,
+         0.        , 0.        ],
+        [0.00311168, 0.00311098, 0.00311061, ..., 0.        ,
+         0.        , 0.        ],
+        ...,
+        [0.00311168, 0.00311163, 0.0031114 , ..., 0.00221002,
+         0.00220918, 0.00220911],
+        [0.00311168, 0.00311162, 0.00311122, ..., 0.0022121 ,
+         0.00221125, 0.0022113 ],
+        [0.00311168, 0.0031116 , 0.00311127, ..., 0.00221395,
+         0.00221309, 0.00221318]]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>uset</span></div><div class='xr-var-dims'>(case)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0015 0.003 ... 0.0015 0.003</div><input id='attrs-600892d9-7d48-4702-9f78-0909c97b2732' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-600892d9-7d48-4702-9f78-0909c97b2732' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-be84b70c-c314-42ef-88a0-abb60ae49fcd' class='xr-var-data-in' type='checkbox'><label for='data-be84b70c-c314-42ef-88a0-abb60ae49fcd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Settling Velocity</dd><dt><span>long_name :</span></dt><dd>$u_s$</dd></dl></div><div class='xr-var-data'><pre>array([0.    , 0.0015, 0.003 , 0.    , 0.0015, 0.003 , 0.    , 0.0015,
+       0.003 , 0.    , 0.0015, 0.003 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Ri0</span></div><div class='xr-var-dims'>(case)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.2078 0.2602 ... 0.00151 0.001891</div><input id='attrs-e7f34daf-7965-4620-8dce-7512266537a4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e7f34daf-7965-4620-8dce-7512266537a4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e49c94d2-c8a3-47c1-b973-f43d957cb67d' class='xr-var-data-in' type='checkbox'><label for='data-e49c94d2-c8a3-47c1-b973-f43d957cb67d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Initial Richardson Number</dd><dt><span>long_name :</span></dt><dd>$Ri_0$</dd></dl></div><div class='xr-var-data'><pre>array([0.2078076 , 0.26024218, 0.32590719, 0.04607806, 0.0577046 ,
+       0.07226478, 0.00804115, 0.01007012, 0.01261103, 0.00120563,
+       0.00150984, 0.00189081])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Fr0</span></div><div class='xr-var-dims'>(case)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.194 1.96 1.752 ... 25.74 23.0</div><input id='attrs-fb439e5a-10a9-4048-a0cb-381047da165f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fb439e5a-10a9-4048-a0cb-381047da165f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ccac995a-5eea-4955-a627-f6ce72ebaf35' class='xr-var-data-in' type='checkbox'><label for='data-ccac995a-5eea-4955-a627-f6ce72ebaf35' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Initial densimetric Froude Number</dd><dt><span>long_name :</span></dt><dd>$Fr_0$</dd></dl></div><div class='xr-var-data'><pre>array([ 2.19365985,  1.96024863,  1.75167297,  4.65857325,  4.16288869,
+        3.71994629, 11.1516955 ,  9.96512551,  8.90480972, 28.8       ,
+       25.7356036 , 22.9972671 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Re</span></div><div class='xr-var-dims'>(case)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.5e+03 2.5e+03 ... 2.5e+03 2.5e+03</div><input id='attrs-6e780b51-0988-4736-9d46-7a92f69f84f4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6e780b51-0988-4736-9d46-7a92f69f84f4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-09938e50-3bb1-4072-b8db-834f4cac5d2d' class='xr-var-data-in' type='checkbox'><label for='data-09938e50-3bb1-4072-b8db-834f4cac5d2d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Reynolds Number</dd><dt><span>long_name :</span></dt><dd>$Re$</dd></dl></div><div class='xr-var-data'><pre>array([2500., 2500., 2500., 2500., 2500., 2500., 2500., 2500., 2500.,
+       2500., 2500., 2500.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>S</span></div><div class='xr-var-dims'>(case)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0125 0.0125 0.0125 ... 0.1 0.1</div><input id='attrs-5c22c6df-169d-4673-acbf-71893f2591b7' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5c22c6df-169d-4673-acbf-71893f2591b7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1ec1b844-e185-4672-9b03-224b5ab690bf' class='xr-var-data-in' type='checkbox'><label for='data-1ec1b844-e185-4672-9b03-224b5ab690bf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Bed Slop</dd><dt><span>long_name :</span></dt><dd>$S$</dd></dl></div><div class='xr-var-data'><pre>array([0.0125, 0.0125, 0.0125, 0.025 , 0.025 , 0.025 , 0.05  , 0.05  ,
+       0.05  , 0.1   , 0.1   , 0.1   ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Uh</span></div><div class='xr-var-dims'>(case, t, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-0.0 -0.0 ... 0.5849177 0.58932585</div><input id='attrs-86b87145-f161-4db6-b77f-ba11312f4d2d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-86b87145-f161-4db6-b77f-ba11312f4d2d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d3eabcd0-486c-48da-af7f-3aa238edaf64' class='xr-var-data-in' type='checkbox'><label for='data-d3eabcd0-486c-48da-af7f-3aa238edaf64' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Layer-averaged Uh</dd><dt><span>long_name :</span></dt><dd>$Uh$</dd></dl></div><div class='xr-var-data'><pre>array([[[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0103751 ,  1.010339  ,  1.010047  , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0086294 ,  1.0086745 ,  1.0085464 , ..., -0.        ,
+         -0.        , -0.        ],
+        ...,
+        [ 1.0124542 ,  1.0124925 ,  1.012646  , ...,  1.2238818 ,
+          1.2248304 ,  1.2256993 ],
+        [ 1.0122812 ,  1.0123067 ,  1.0121564 , ...,  1.2213185 ,
+          1.2224886 ,  1.2236474 ],
+        [ 1.0122406 ,  1.0122132 ,  1.0122367 , ...,  1.2202268 ,
+          1.2211373 ,  1.2220134 ]],
+
+       [[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0102524 ,  1.0101936 ,  1.009876  , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0085709 ,  1.0086036 ,  1.0084682 , ..., -0.        ,
+         -0.        , -0.        ],
+...
+        [ 1.0152423 ,  1.0152498 ,  1.0155361 , ...,  0.9266062 ,
+          0.9226829 ,  0.9188998 ],
+        [ 1.015295  ,  1.0154744 ,  1.0158141 , ...,  0.92356277,
+          0.91928715,  0.915325  ],
+        [ 1.015456  ,  1.0154941 ,  1.0156696 , ...,  0.93108577,
+          0.92659116,  0.9117084 ]],
+
+       [[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0125299 ,  1.0121177 ,  1.0129049 , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0120105 ,  1.0120955 ,  1.0123501 , ..., -0.        ,
+         -0.        , -0.        ],
+        ...,
+        [ 1.0154123 ,  1.0156045 ,  1.0158241 , ...,  0.5807433 ,
+          0.5847533 ,  0.5884292 ],
+        [ 1.0159984 ,  1.015989  ,  1.0161397 , ...,  0.580842  ,
+          0.58525795,  0.5892495 ],
+        [ 1.0154539 ,  1.0158057 ,  1.0161474 , ...,  0.580042  ,
+          0.5849177 ,  0.58932585]]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>U2h</span></div><div class='xr-var-dims'>(case, t, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-0.0 -0.0 ... 0.108770296</div><input id='attrs-33833224-6726-4034-a19d-ccded57c56f9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-33833224-6726-4034-a19d-ccded57c56f9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2226e7f3-f0c1-48d2-b150-b78cdcc02e94' class='xr-var-data-in' type='checkbox'><label for='data-2226e7f3-f0c1-48d2-b150-b78cdcc02e94' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Layer-averaged U2h</dd><dt><span>long_name :</span></dt><dd>$U^2h$</dd></dl></div><div class='xr-var-data'><pre>array([[[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0270144 ,  1.017984  ,  1.0066918 , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0433934 ,  1.0373162 ,  1.0281048 , ..., -0.        ,
+         -0.        , -0.        ],
+        ...,
+        [ 1.0556352 ,  1.0555681 ,  1.0521555 , ...,  0.93392503,
+          0.9347162 ,  0.93605834],
+        [ 1.0569899 ,  1.0550085 ,  1.0543498 , ...,  0.9292461 ,
+          0.9305577 ,  0.9325206 ],
+        [ 1.0629513 ,  1.0579572 ,  1.0518287 , ...,  0.9279312 ,
+          0.928596  ,  0.92981917]],
+
+       [[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0254858 ,  1.0162114 ,  1.0047679 , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0423796 ,  1.0361623 ,  1.0268507 , ..., -0.        ,
+         -0.        , -0.        ],
+...
+        [ 1.0529277 ,  1.0413616 ,  1.0292168 , ...,  0.15079424,
+          0.15189368,  0.1529683 ],
+        [ 1.0587411 ,  1.0456787 ,  1.0306144 , ...,  0.14905995,
+          0.15022895,  0.15147543],
+        [ 1.0512083 ,  1.0421546 ,  1.0283751 , ...,  0.14817905,
+          0.14921546,  0.14970034]],
+
+       [[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0307782 ,  1.0159928 ,  1.003648  , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.041852  ,  1.027998  ,  1.013466  , ..., -0.        ,
+         -0.        , -0.        ],
+        ...,
+        [ 1.0539932 ,  1.0429839 ,  1.028557  , ...,  0.10745198,
+          0.10792114,  0.10835563],
+        [ 1.05882   ,  1.0460858 ,  1.0366911 , ...,  0.10752113,
+          0.10814399,  0.10869256],
+        [ 1.0444778 ,  1.0405916 ,  1.0360613 , ...,  0.10725929,
+          0.10806271,  0.1087703 ]]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>UCh</span></div><div class='xr-var-dims'>(case, t, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-0.0 -0.0 ... 0.26402205 0.26640958</div><input id='attrs-ef1a29a8-4e5b-4ffb-99ce-33fbce24db12' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ef1a29a8-4e5b-4ffb-99ce-33fbce24db12' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3e9acc12-017f-4eff-9ab3-09dbd28be2ac' class='xr-var-data-in' type='checkbox'><label for='data-3e9acc12-017f-4eff-9ab3-09dbd28be2ac' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Layer-averaged UCh</dd><dt><span>long_name :</span></dt><dd>$UCh$</dd></dl></div><div class='xr-var-data'><pre>array([[[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0103041 ,  1.0098116 ,  1.0035512 , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0086278 ,  1.0083003 ,  1.0083425 , ..., -0.        ,
+         -0.        , -0.        ],
+        ...,
+        [ 1.012454  ,  1.0124924 ,  1.012646  , ...,  0.9426022 ,
+          0.9436683 ,  0.94482267],
+        [ 1.0122812 ,  1.0123065 ,  1.0121564 , ...,  0.93143606,
+          0.93338954,  0.93541354],
+        [ 1.0122405 ,  1.0122131 ,  1.0122366 , ...,  0.9381785 ,
+          0.9374758 ,  0.9358295 ]],
+
+       [[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0183482 ,  1.0157049 ,  1.0138443 , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0158882 ,  1.0165602 ,  1.0156181 , ..., -0.        ,
+         -0.        , -0.        ],
+...
+        [ 1.0194275 ,  1.0175557 ,  1.0199953 , ...,  0.421475  ,
+          0.42821524,  0.43671224],
+        [ 1.0172907 ,  1.0171483 ,  1.0149574 , ...,  0.41629   ,
+          0.4182311 ,  0.4242782 ],
+        [ 1.0199783 ,  1.0205287 ,  1.0222013 , ...,  0.41678208,
+          0.41507787,  0.41526657]],
+
+       [[-0.        , -0.        , -0.        , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.0189657 ,  1.0180048 ,  1.0061387 , ..., -0.        ,
+         -0.        , -0.        ],
+        [ 1.01805   ,  1.0192399 ,  1.018888  , ..., -0.        ,
+         -0.        , -0.        ],
+        ...,
+        [ 1.0189918 ,  1.0194458 ,  1.0176332 , ...,  0.26887798,
+          0.2707069 ,  0.27223167],
+        [ 1.0188583 ,  1.0187445 ,  1.016335  , ...,  0.26556456,
+          0.2677769 ,  0.26978812],
+        [ 1.0190738 ,  1.0182059 ,  1.0172524 , ...,  0.26157898,
+          0.26402205,  0.26640958]]], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b4889d38-c18f-4593-afdb-dc321399c842' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b4889d38-c18f-4593-afdb-dc321399c842' class='xr-section-summary' >Attributes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>title :</span></dt><dd>Plunging condition for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations</dd><dt><span>authors :</span></dt><dd>F. N. Schuch, E. Meiburg &amp; J. H. Silvestrini</dd><dt><span>url :</span></dt><dd>https://github.com/fschuch/incompact3d_plunging_criterion</dd><dt><span>doi :</span></dt><dd>10.5281/zenodo.4044388</dd><dt><span>license :</span></dt><dd>Creative Commons Attribution 4.0 International</dd></dl></div></li></ul></div></div></div></div>
+</div>
+<p>For further information see <a class="reference external" href="http://xarray.pydata.org/en/stable/why-xarray.html">Why xarray</a>, and off course, <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray’s Documentation</a>.</p>
+<p>Now, we can compute and plot all layer-averaged quantities:</p>
+<ul class="simple">
+<li><p>Layer-averaged Velocity:
+$<span class="math notranslate nohighlight">\(
+U(x_1,t) = \dfrac{U^2h}{Uh}
+\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;U&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">U2h</span> <span class="o">/</span> <span class="n">ds</span><span class="o">.</span><span class="n">Uh</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">U</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Layer-averaged Velocity&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$U$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">U</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8f02d35a892b7c861265f3e6a9a5ffe473d3407a7a37a22f31365b0d10212bd8.png" src="../_images/8f02d35a892b7c861265f3e6a9a5ffe473d3407a7a37a22f31365b0d10212bd8.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Underflow depth:
+$<span class="math notranslate nohighlight">\(
+H(x_1,t) = \dfrac{(Uh)^2}{U^2h}
+\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Uh</span> <span class="o">**</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">ds</span><span class="o">.</span><span class="n">U2h</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Flow depth&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$H$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1ca54f62234e22a467c0d4afde049de04af665005b8cbb5470a39a340af04c5e.png" src="../_images/1ca54f62234e22a467c0d4afde049de04af665005b8cbb5470a39a340af04c5e.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Mixing coefficient:
+$<span class="math notranslate nohighlight">\(
+\gamma(x_1,t) = \dfrac{Uh}{1} - 1
+\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;mixing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">U</span> <span class="o">*</span> <span class="n">ds</span><span class="o">.</span><span class="n">H</span> <span class="o">-</span> <span class="mf">1.0</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">mixing</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mixing coefficient&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$\gamma$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">mixing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5b7976007c2d97082896d084a8465c4b9124cbda63f655b99030d59ab3efdff0.png" src="../_images/5b7976007c2d97082896d084a8465c4b9124cbda63f655b99030d59ab3efdff0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Layer-averaged total concentration:
+$<span class="math notranslate nohighlight">\(
+C (x_1,t) = \dfrac{UCh}{Uh}
+\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">UCh</span> <span class="o">/</span> <span class="n">ds</span><span class="o">.</span><span class="n">Uh</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Layer-averaged Concentration&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$C$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2ab2162722e4407e7b41f6eb1359f6ccea5638789c2976e464bc181e45164e10.png" src="../_images/2ab2162722e4407e7b41f6eb1359f6ccea5638789c2976e464bc181e45164e10.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Densimetric Froude number:
+$<span class="math notranslate nohighlight">\(
+Fr(x_1,t) = \dfrac{Uh}{\sqrt{CH^3}}Fr_0
+\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;Fr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Fr0</span> <span class="o">*</span> <span class="n">ds</span><span class="o">.</span><span class="n">Uh</span> <span class="o">*</span> <span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">C</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">H</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">3.0</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">))</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">Fr</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Local densimetric Fround number&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$Fr$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">Fr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cd70b5b884dbf73168facfebb49e5128f0837c62180cc4d4c8c2f05b65efb803.png" src="../_images/cd70b5b884dbf73168facfebb49e5128f0837c62180cc4d4c8c2f05b65efb803.png" />
+</div>
+</div>
+<p>And plot the spanwise-avareged quantities:</p>
+<ul class="simple">
+<li><p>Bed shear velocity:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">utau</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;case&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc7a92c13df8fd626d92e605415f1818cb6d3c5ed579190c8f1bd5c7ce54cef0.png" src="../_images/dc7a92c13df8fd626d92e605415f1818cb6d3c5ed579190c8f1bd5c7ce54cef0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Deposition rate:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">dep</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;case&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8c4dd515aa76c97d06adac03483d196b4d8cc61a1e8117e89fd64b009e9e785f.png" src="../_images/8c4dd515aa76c97d06adac03483d196b4d8cc61a1e8117e89fd64b009e9e785f.png" />
+</div>
+</div>
+</section>
+<section id="other">
+<h2>Other<a class="headerlink" href="#other" title="Link to this heading">#</a></h2>
+<p>Some of the flow features can be obtained with the layer-averaged quantities, for instance:</p>
+<ul class="simple">
+<li><p>The plunge point is located where the densimetric Froude number is minimum:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fill NaN with a large number just to avoid problems and get where it is minimum</span>
+<span class="n">ixp</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Fr</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="c1"># Then obtain plunge point position (where it is inside the test section)</span>
+<span class="n">ds</span><span class="p">[</span><span class="s2">&quot;xp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">ixp</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ixp</span> <span class="o">!=</span> <span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ds</span><span class="o">.</span><span class="n">xp</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Distance for plunging&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$x_p$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">xp</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc5b42ac1204af3a285d63b4137df9b432877bb9be6bfa39937b7319491ae2aa.png" src="../_images/dc5b42ac1204af3a285d63b4137df9b432877bb9be6bfa39937b7319491ae2aa.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Densimetric Frounde number at plunge point:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># It is the minimum value inside the test section</span>
+<span class="n">ds</span><span class="p">[</span><span class="s2">&quot;Frp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Fr</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ixp</span> <span class="o">!=</span> <span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ds</span><span class="o">.</span><span class="n">Frp</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Densimetric Frounde number at plunge point&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$Fr_p$&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">Frp</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\felip\anaconda3\lib\site-packages\xarray\core\nputils.py:227: RuntimeWarning: All-NaN slice encountered
+  result = getattr(npmodule, name)(values, axis=axis, **kwargs)
+</pre></div>
+</div>
+<img alt="../_images/cfddef5130bb745e4748869bdf65228817d86dc087fe61e1f9fa015a02df015f.png" src="../_images/cfddef5130bb745e4748869bdf65228817d86dc087fe61e1f9fa015a02df015f.png" />
+</div>
+</div>
+<p>What is the time and case averaged densimetric Froude number at plunge point?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">Frp</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="mi">6000</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s2">&quot;case&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt, dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;Frp&#x27; ()&gt;
+array(0.45329615)</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'Frp'</div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-2a2a3837-dc11-4515-a75a-5185947fdaa8' class='xr-array-in' type='checkbox' checked><label for='section-2a2a3837-dc11-4515-a75a-5185947fdaa8' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.4533</span></div><div class='xr-array-data'><pre>array(0.45329615)</pre></div></div></li><li class='xr-section-item'><input id='section-71ccebc5-2934-4d6e-ac76-e3dcabacbbee' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-71ccebc5-2934-4d6e-ac76-e3dcabacbbee' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-d1348a8f-194e-48c3-b05b-5f7cd82776e0' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d1348a8f-194e-48c3-b05b-5f7cd82776e0' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+<ul class="simple">
+<li><p>Front position:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ixf</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Uh</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">ds</span><span class="p">[</span><span class="s2">&quot;xf&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">ixf</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;=</span> <span class="n">ds</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="n">ixf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">)])</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">xf</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Front position&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$x_f$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">xf</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4765a5781443d86fa23e61b29260d1d5ff02a5c3022f885436ca693e725db431.png" src="../_images/4765a5781443d86fa23e61b29260d1d5ff02a5c3022f885436ca693e725db431.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Front velocity:
+$<span class="math notranslate nohighlight">\(
+u_f = \dfrac{d x_f}{d t}
+\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a rolling average is used to reduce the noise</span>
+<span class="n">ds</span><span class="p">[</span><span class="s2">&quot;uf&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">xf</span><span class="o">.</span><span class="n">differentiate</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">uf</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Front velocity&quot;</span><span class="p">,</span> <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;$u_f$&quot;</span><span class="p">}</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">uf</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bf16a8dd73073bc2d9cfb7ca7b8b83c0c20b8b363f3a55ccded52d9498c20e65.png" src="../_images/bf16a8dd73073bc2d9cfb7ca7b8b83c0c20b8b363f3a55ccded52d9498c20e65.png" />
+</div>
+</div>
+</section>
+<section id="flow-evolution">
+<h2>Flow evolution<a class="headerlink" href="#flow-evolution" title="Link to this heading">#</a></h2>
+<p>Lets load the spanwise-averaged planes from case <code class="docutils literal notranslate"><span class="pre">5.0-15</span></code> as an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xyplanes</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;xy-planes-case-5.0-15.nc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xyplanes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt, dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:       (t: 801, x: 801, y: 121)
+Coordinates:
+  * x             (x) float32 0.0 0.3125 0.625 0.9375 ... 249.375 249.6875 250.0
+  * y             (y) float32 16.875 16.734375 16.59375 ... 0.28125 0.140625 0.0
+  * t             (t) float32 0.0 5.0 10.0 15.0 ... 3985.0 3990.0 3995.0 4000.0
+Data variables:
+    phi           (t, x, y) float32 0.0 0.0 0.0 ... 2.7094759e-11 1.6721305e-11
+    ux            (t, x, y) float32 0.0 0.0 0.0 ... -0.040188063 -0.040198755
+    uy            (t, x, y) float32 0.0 0.0 0.0 ... -2.8484597e-05 0.0
+    utau          (t, x) float32 0.064214714 0.002707824 ... 0.018694893
+    dep           (t, x) float32 0.0 0.0 0.0 ... 0.001327706 0.0013275965
+    uset          float64 0.0015
+    Ri0           float64 0.01007
+    Fr0           float64 9.965
+    Re            float64 2.5e+03
+    S             float64 0.05
+    bed_position  (x) float32 1.0 1.015625 1.03125 ... 13.46875 13.484375 13.5
+Attributes:
+    title:    Plunging condition for particle-laden flows over sloping bottom...
+    authors:  F. N. Schuch, E. Meiburg &amp; J. H. Silvestrini
+    url:      https://github.com/fschuch/incompact3d_plunging_criterion
+    doi:      10.5281/zenodo.4044388
+    license:  Creative Commons Attribution 4.0 International</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-c3053dd7-fc6e-4b0c-96ef-673b55c13ef3' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c3053dd7-fc6e-4b0c-96ef-673b55c13ef3' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>t</span>: 801</li><li><span class='xr-has-index'>x</span>: 801</li><li><span class='xr-has-index'>y</span>: 121</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-cf88e516-3578-4cc8-9d67-3dccfc7d7c23' class='xr-section-summary-in' type='checkbox'  checked><label for='section-cf88e516-3578-4cc8-9d67-3dccfc7d7c23' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.3125 0.625 ... 249.6875 250.0</div><input id='attrs-8de4067d-3bd6-4f44-8cac-e76b81b6ec37' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8de4067d-3bd6-4f44-8cac-e76b81b6ec37' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b07aa91b-a96d-42b4-afcf-88e763f67911' class='xr-var-data-in' type='checkbox'><label for='data-b07aa91b-a96d-42b4-afcf-88e763f67911' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Streamwise coordinate</dd><dt><span>long_name :</span></dt><dd>$x_1$</dd></dl></div><div class='xr-var-data'><pre>array([  0.    ,   0.3125,   0.625 , ..., 249.375 , 249.6875, 250.    ],
+      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>16.875 16.734375 ... 0.140625 0.0</div><input id='attrs-f8fa867b-a753-4b4e-a5ea-bdd27714d3c2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f8fa867b-a753-4b4e-a5ea-bdd27714d3c2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dfe16448-7068-4c10-85d1-8d1d00e5fae4' class='xr-var-data-in' type='checkbox'><label for='data-dfe16448-7068-4c10-85d1-8d1d00e5fae4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Vertical coordinate</dd><dt><span>long_name :</span></dt><dd>$x_2$</dd></dl></div><div class='xr-var-data'><pre>array([16.875   , 16.734375, 16.59375 , 16.453125, 16.3125  , 16.171875,
+       16.03125 , 15.890625, 15.75    , 15.609375, 15.46875 , 15.328125,
+       15.1875  , 15.046875, 14.90625 , 14.765625, 14.625   , 14.484375,
+       14.34375 , 14.203125, 14.0625  , 13.921875, 13.78125 , 13.640625,
+       13.5     , 13.359375, 13.21875 , 13.078125, 12.9375  , 12.796875,
+       12.65625 , 12.515625, 12.375   , 12.234375, 12.09375 , 11.953125,
+       11.8125  , 11.671875, 11.53125 , 11.390625, 11.25    , 11.109375,
+       10.96875 , 10.828125, 10.6875  , 10.546875, 10.40625 , 10.265625,
+       10.125   ,  9.984375,  9.84375 ,  9.703125,  9.5625  ,  9.421875,
+        9.28125 ,  9.140625,  9.      ,  8.859375,  8.71875 ,  8.578125,
+        8.4375  ,  8.296875,  8.15625 ,  8.015625,  7.875   ,  7.734375,
+        7.59375 ,  7.453125,  7.3125  ,  7.171875,  7.03125 ,  6.890625,
+        6.75    ,  6.609375,  6.46875 ,  6.328125,  6.1875  ,  6.046875,
+        5.90625 ,  5.765625,  5.625   ,  5.484375,  5.34375 ,  5.203125,
+        5.0625  ,  4.921875,  4.78125 ,  4.640625,  4.5     ,  4.359375,
+        4.21875 ,  4.078125,  3.9375  ,  3.796875,  3.65625 ,  3.515625,
+        3.375   ,  3.234375,  3.09375 ,  2.953125,  2.8125  ,  2.671875,
+        2.53125 ,  2.390625,  2.25    ,  2.109375,  1.96875 ,  1.828125,
+        1.6875  ,  1.546875,  1.40625 ,  1.265625,  1.125   ,  0.984375,
+        0.84375 ,  0.703125,  0.5625  ,  0.421875,  0.28125 ,  0.140625,
+        0.      ], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>t</span></div><div class='xr-var-dims'>(t)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 5.0 10.0 ... 3995.0 4000.0</div><input id='attrs-f12b82bc-eb11-44a0-87c5-26a0066d8647' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f12b82bc-eb11-44a0-87c5-26a0066d8647' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c1935dcc-000a-4e21-9bd1-bcbedb05c1fe' class='xr-var-data-in' type='checkbox'><label for='data-c1935dcc-000a-4e21-9bd1-bcbedb05c1fe' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>$t$</dd></dl></div><div class='xr-var-data'><pre>array([   0.,    5.,   10., ..., 3990., 3995., 4000.], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-948e3b70-ae16-452f-811c-8b012854ed43' class='xr-section-summary-in' type='checkbox'  checked><label for='section-948e3b70-ae16-452f-811c-8b012854ed43' class='xr-section-summary' >Data variables: <span>(11)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>phi</span></div><div class='xr-var-dims'>(t, x, y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 ... 1.6721305e-11</div><input id='attrs-8beff07b-9dcf-4d17-b2b0-82c938277726' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8beff07b-9dcf-4d17-b2b0-82c938277726' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-99332f2e-edda-4875-aa85-aaceb79287a2' class='xr-var-data-in' type='checkbox'><label for='data-99332f2e-edda-4875-aa85-aaceb79287a2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Concentration Field</dd><dt><span>long_name :</span></dt><dd>$c$</dd></dl></div><div class='xr-var-data'><pre>array([[[0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+        ...,
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         0.00000000e+00, 0.00000000e+00, 0.00000000e+00]],
+
+       [[0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.03826523e+00, 9.44521010e-01, 6.88998103e-01],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.03476787e+00, 9.41118240e-01, 6.86808646e-01],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.03867555e+00, 9.42656457e-01, 6.86390758e-01],
+...
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         2.45168857e-10, 6.48830364e-11, 2.11933734e-11],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.96932567e-10, 3.65059788e-11, 1.26693005e-11],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.41515105e-10, 2.62713306e-11, 1.42462934e-11]],
+
+       [[0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.03825855e+00, 9.44697320e-01, 6.88938379e-01],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.03664207e+00, 9.40903008e-01, 6.85339510e-01],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.03279352e+00, 9.32705760e-01, 6.77617610e-01],
+        ...,
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         2.26780802e-10, 5.24386611e-11, 1.53452893e-11],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.75210679e-10, 3.07475191e-11, 1.21713776e-11],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, ...,
+         1.20950333e-10, 2.70947587e-11, 1.67213049e-11]]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>ux</span></div><div class='xr-var-dims'>(t, x, y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 ... -0.040198755</div><input id='attrs-a8eeaf76-9441-4c74-888c-2b640cebfb8c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a8eeaf76-9441-4c74-888c-2b640cebfb8c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-af4fd4b9-aa0e-41db-8bae-bd9aca096bb5' class='xr-var-data-in' type='checkbox'><label for='data-af4fd4b9-aa0e-41db-8bae-bd9aca096bb5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Streamwise Velocity</dd><dt><span>long_name :</span></dt><dd>$u_1$</dd></dl></div><div class='xr-var-data'><pre>array([[[ 0.        ,  0.        ,  0.        , ...,  1.0688505 ,
+          1.0668404 ,  1.068818  ],
+        [ 0.        ,  0.        ,  0.        , ...,  0.        ,
+          0.        ,  0.        ],
+        [ 0.        ,  0.        ,  0.        , ...,  0.        ,
+          0.        ,  0.        ],
+        ...,
+        [ 0.        ,  0.        ,  0.        , ...,  0.        ,
+          0.        ,  0.        ],
+        [ 0.        ,  0.        ,  0.        , ...,  0.        ,
+          0.        ,  0.        ],
+        [ 0.        ,  0.        ,  0.        , ...,  0.        ,
+          0.        ,  0.        ]],
+
+       [[ 0.        ,  0.        ,  0.        , ...,  1.0688424 ,
+          1.068653  ,  1.0612284 ],
+        [ 0.        ,  0.        ,  0.        , ...,  1.0595537 ,
+          1.0586491 ,  1.0523875 ],
+        [ 0.        ,  0.        ,  0.        , ...,  1.0497624 ,
+          1.0479091 ,  1.0415454 ],
+...
+        [ 0.        ,  0.        ,  0.        , ..., -0.04050307,
+         -0.04052111, -0.0405319 ],
+        [ 0.        ,  0.        ,  0.        , ..., -0.04061428,
+         -0.04063921, -0.04064276],
+        [ 0.        ,  0.        ,  0.        , ..., -0.04069244,
+         -0.04071048, -0.04072122]],
+
+       [[ 0.        ,  0.        ,  0.        , ...,  1.1616069 ,
+          1.2385147 ,  1.2674499 ],
+        [ 0.        ,  0.        ,  0.        , ...,  1.1617756 ,
+          1.2519102 ,  1.2925639 ],
+        [ 0.        ,  0.        ,  0.        , ...,  1.1764224 ,
+          1.2366723 ,  1.263374  ],
+        ...,
+        [ 0.        ,  0.        ,  0.        , ..., -0.03996496,
+         -0.03998281, -0.03999346],
+        [ 0.        ,  0.        ,  0.        , ..., -0.0400837 ,
+         -0.04010848, -0.04011202],
+        [ 0.        ,  0.        ,  0.        , ..., -0.04017003,
+         -0.04018806, -0.04019875]]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>uy</span></div><div class='xr-var-dims'>(t, x, y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 ... -2.8484597e-05 0.0</div><input id='attrs-3b0c5e0a-6fa3-4437-b559-c8e4e0015717' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3b0c5e0a-6fa3-4437-b559-c8e4e0015717' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-79659fd8-f090-461d-9de4-6e061f3ef354' class='xr-var-data-in' type='checkbox'><label for='data-79659fd8-f090-461d-9de4-6e061f3ef354' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Vertical Velocity</dd><dt><span>long_name :</span></dt><dd>$u_2$</dd></dl></div><div class='xr-var-data'><pre>array([[[ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -3.25344663e-05, -9.96725168e-04,  8.26145289e-04],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+          0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+          0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
+        ...,
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+          0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+          0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+          0.00000000e+00,  0.00000000e+00,  0.00000000e+00]],
+
+       [[ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -8.05330742e-03, -3.88078485e-03,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -9.49160475e-03, -4.55480907e-03,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -9.92371608e-03, -4.75022988e-03,  0.00000000e+00],
+...
+         -1.20326797e-04, -6.00528256e-05,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -8.39787899e-05, -4.20185643e-05,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -4.90347920e-05, -2.45543652e-05,  0.00000000e+00]],
+
+       [[ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+          1.70091894e-02,  1.49879968e-02,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+          2.90255132e-03,  3.66300374e-04,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -2.52630506e-02, -2.06915364e-02,  0.00000000e+00],
+        ...,
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -1.26976898e-04, -6.34007738e-05,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -9.10901435e-05, -4.55889858e-05,  0.00000000e+00],
+        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
+         -5.68803371e-05, -2.84845974e-05,  0.00000000e+00]]],
+      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>utau</span></div><div class='xr-var-dims'>(t, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.064214714 ... 0.018694893</div><input id='attrs-ef9011b8-e2f0-4218-ba15-d2e5c659f26e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ef9011b8-e2f0-4218-ba15-d2e5c659f26e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-df690e28-d0eb-4c26-bfce-626bf5c96cd6' class='xr-var-data-in' type='checkbox'><label for='data-df690e28-d0eb-4c26-bfce-626bf5c96cd6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[0.06421471, 0.00270782, 0.0013406 , ..., 0.        , 0.        ,
+        0.        ],
+       [0.06085397, 0.05927191, 0.0576125 , ..., 0.01437514, 0.01412304,
+        0.01416974],
+       [0.05704392, 0.05535008, 0.0537332 , ..., 0.01359409, 0.0134089 ,
+        0.01335811],
+       ...,
+       [0.0585585 , 0.05663158, 0.05431736, ..., 0.0180604 , 0.01833731,
+        0.01867476],
+       [0.05675026, 0.05644575, 0.05367268, ..., 0.01817203, 0.01823947,
+        0.01847443],
+       [0.05496647, 0.05348277, 0.05230506, ..., 0.0186661 , 0.01861479,
+        0.01869489]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dep</span></div><div class='xr-var-dims'>(t, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 ... 0.0013275965</div><input id='attrs-58f8367a-043a-4cf4-b1cb-d55b69136d21' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-58f8367a-043a-4cf4-b1cb-d55b69136d21' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d5aefd88-1999-49e9-9d04-a09eb55369a8' class='xr-var-data-in' type='checkbox'><label for='data-d5aefd88-1999-49e9-9d04-a09eb55369a8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Deposition rate</dd><dt><span>long_name :</span></dt><dd>$\dot{D}$</dd></dl></div><div class='xr-var-data'><pre>array([[0.        , 0.        , 0.        , ..., 0.        , 0.        ,
+        0.        ],
+       [0.00157904, 0.00157865, 0.00157575, ..., 0.        , 0.        ,
+        0.        ],
+       [0.00157904, 0.00157894, 0.00157904, ..., 0.        , 0.        ,
+        0.        ],
+       ...,
+       [0.00157904, 0.00157902, 0.00157898, ..., 0.00132884, 0.00132924,
+        0.00132933],
+       [0.00157904, 0.00157902, 0.00157898, ..., 0.00132764, 0.00132745,
+        0.00132739],
+       [0.00157904, 0.00157901, 0.00157899, ..., 0.00132772, 0.00132771,
+        0.0013276 ]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>uset</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0015</div><input id='attrs-8eb0968d-f801-4dbf-9fcf-fbe82d50b88d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8eb0968d-f801-4dbf-9fcf-fbe82d50b88d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e6e39f4b-b40b-4ac1-bee7-88bc46fc08c8' class='xr-var-data-in' type='checkbox'><label for='data-e6e39f4b-b40b-4ac1-bee7-88bc46fc08c8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Settling Velocity</dd><dt><span>long_name :</span></dt><dd>$u_s$</dd></dl></div><div class='xr-var-data'><pre>array(0.0015)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Ri0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.01007</div><input id='attrs-e16c1b63-8efa-4921-99a2-27048ead64e3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e16c1b63-8efa-4921-99a2-27048ead64e3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f6f1435b-1cd7-444f-baf3-cc53e26853f7' class='xr-var-data-in' type='checkbox'><label for='data-f6f1435b-1cd7-444f-baf3-cc53e26853f7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Initial Richardson Number</dd><dt><span>long_name :</span></dt><dd>$Ri_0$</dd></dl></div><div class='xr-var-data'><pre>array(0.01007012)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Fr0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>9.965</div><input id='attrs-a7e9b693-1f8e-40d8-8aa2-608ccccacdde' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a7e9b693-1f8e-40d8-8aa2-608ccccacdde' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-14f86e01-b177-4c71-988c-a56b16c07d75' class='xr-var-data-in' type='checkbox'><label for='data-14f86e01-b177-4c71-988c-a56b16c07d75' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Initial densimetric Froude Number</dd><dt><span>long_name :</span></dt><dd>$Fr_0$</dd></dl></div><div class='xr-var-data'><pre>array(9.96512551)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Re</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.5e+03</div><input id='attrs-94d96918-bfc0-48dc-a581-887f066fdbbf' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-94d96918-bfc0-48dc-a581-887f066fdbbf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d1214ac1-b281-4aa5-b952-a4e837c86b81' class='xr-var-data-in' type='checkbox'><label for='data-d1214ac1-b281-4aa5-b952-a4e837c86b81' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Reynolds Number</dd><dt><span>long_name :</span></dt><dd>$Re$</dd></dl></div><div class='xr-var-data'><pre>array(2500.)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>S</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.05</div><input id='attrs-d550bab3-031d-4cfa-bedd-422673c2e9da' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d550bab3-031d-4cfa-bedd-422673c2e9da' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bd50c005-a6bc-4ec1-80c5-5d7b88db004c' class='xr-var-data-in' type='checkbox'><label for='data-bd50c005-a6bc-4ec1-80c5-5d7b88db004c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Bed Slop</dd><dt><span>long_name :</span></dt><dd>$S$</dd></dl></div><div class='xr-var-data'><pre>array(0.05)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bed_position</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.015625 ... 13.484375 13.5</div><input id='attrs-548e0eac-c371-441a-b1b9-abe799ce5393' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-548e0eac-c371-441a-b1b9-abe799ce5393' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-762e8bc1-a175-45f3-b2ad-1d19fe7589c0' class='xr-var-data-in' type='checkbox'><label for='data-762e8bc1-a175-45f3-b2ad-1d19fe7589c0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>Bed position</dd><dt><span>long_name :</span></dt><dd>$x_{2r}$</dd></dl></div><div class='xr-var-data'><pre>array([ 1.      ,  1.015625,  1.03125 ,  1.046875,  1.0625  ,  1.078125,
+        1.09375 ,  1.109375,  1.125   ,  1.140625,  1.15625 ,  1.171875,
+        1.1875  ,  1.203125,  1.21875 ,  1.234375,  1.25    ,  1.265625,
+        1.28125 ,  1.296875,  1.3125  ,  1.328125,  1.34375 ,  1.359375,
+        1.375   ,  1.390625,  1.40625 ,  1.421875,  1.4375  ,  1.453125,
+        1.46875 ,  1.484375,  1.5     ,  1.515625,  1.53125 ,  1.546875,
+        1.5625  ,  1.578125,  1.59375 ,  1.609375,  1.625   ,  1.640625,
+        1.65625 ,  1.671875,  1.6875  ,  1.703125,  1.71875 ,  1.734375,
+        1.75    ,  1.765625,  1.78125 ,  1.796875,  1.8125  ,  1.828125,
+        1.84375 ,  1.859375,  1.875   ,  1.890625,  1.90625 ,  1.921875,
+        1.9375  ,  1.953125,  1.96875 ,  1.984375,  2.      ,  2.015625,
+        2.03125 ,  2.046875,  2.0625  ,  2.078125,  2.09375 ,  2.109375,
+        2.125   ,  2.140625,  2.15625 ,  2.171875,  2.1875  ,  2.203125,
+        2.21875 ,  2.234375,  2.25    ,  2.265625,  2.28125 ,  2.296875,
+        2.3125  ,  2.328125,  2.34375 ,  2.359375,  2.375   ,  2.390625,
+        2.40625 ,  2.421875,  2.4375  ,  2.453125,  2.46875 ,  2.484375,
+        2.5     ,  2.515625,  2.53125 ,  2.546875,  2.5625  ,  2.578125,
+        2.59375 ,  2.609375,  2.625   ,  2.640625,  2.65625 ,  2.671875,
+        2.6875  ,  2.703125,  2.71875 ,  2.734375,  2.75    ,  2.765625,
+        2.78125 ,  2.796875,  2.8125  ,  2.828125,  2.84375 ,  2.859375,
+...
+       11.6875  , 11.703125, 11.71875 , 11.734375, 11.75    , 11.765625,
+       11.78125 , 11.796875, 11.8125  , 11.828125, 11.84375 , 11.859375,
+       11.875   , 11.890625, 11.90625 , 11.921875, 11.9375  , 11.953125,
+       11.96875 , 11.984375, 12.      , 12.015625, 12.03125 , 12.046875,
+       12.0625  , 12.078125, 12.09375 , 12.109375, 12.125   , 12.140625,
+       12.15625 , 12.171875, 12.1875  , 12.203125, 12.21875 , 12.234375,
+       12.25    , 12.265625, 12.28125 , 12.296875, 12.3125  , 12.328125,
+       12.34375 , 12.359375, 12.375   , 12.390625, 12.40625 , 12.421875,
+       12.4375  , 12.453125, 12.46875 , 12.484375, 12.5     , 12.515625,
+       12.53125 , 12.546875, 12.5625  , 12.578125, 12.59375 , 12.609375,
+       12.625   , 12.640625, 12.65625 , 12.671875, 12.6875  , 12.703125,
+       12.71875 , 12.734375, 12.75    , 12.765625, 12.78125 , 12.796875,
+       12.8125  , 12.828125, 12.84375 , 12.859375, 12.875   , 12.890625,
+       12.90625 , 12.921875, 12.9375  , 12.953125, 12.96875 , 12.984375,
+       13.      , 13.015625, 13.03125 , 13.046875, 13.0625  , 13.078125,
+       13.09375 , 13.109375, 13.125   , 13.140625, 13.15625 , 13.171875,
+       13.1875  , 13.203125, 13.21875 , 13.234375, 13.25    , 13.265625,
+       13.28125 , 13.296875, 13.3125  , 13.328125, 13.34375 , 13.359375,
+       13.375   , 13.390625, 13.40625 , 13.421875, 13.4375  , 13.453125,
+       13.46875 , 13.484375, 13.5     ], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9c434da9-d3bf-4f1f-b2bb-42c35611d2db' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9c434da9-d3bf-4f1f-b2bb-42c35611d2db' class='xr-section-summary' >Attributes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>title :</span></dt><dd>Plunging condition for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations</dd><dt><span>authors :</span></dt><dd>F. N. Schuch, E. Meiburg &amp; J. H. Silvestrini</dd><dt><span>url :</span></dt><dd>https://github.com/fschuch/incompact3d_plunging_criterion</dd><dt><span>doi :</span></dt><dd>10.5281/zenodo.4044388</dd><dt><span>license :</span></dt><dd>Creative Commons Attribution 4.0 International</dd></dl></div></li></ul></div></div></div></div>
+</div>
+<p>Now, lets select some values as time reference:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And plot total concentration field (notice that matplotlib can be used for adjustments):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xyplanes</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">selected_times</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/26237d57e6a3d0fa8849f23a1aeff91d5f7719dfbe790e72d27711414f56b6c4.png" src="../_images/26237d57e6a3d0fa8849f23a1aeff91d5f7719dfbe790e72d27711414f56b6c4.png" />
+</div>
+</div>
+<p>Now the velocity components:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="s2">&quot;ux uy&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+    <span class="n">xyplanes</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">selected_times</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f8b8f97f04aedd5626e07131491148d17b5a1dfda6660124f08e2a4b3d299370.png" src="../_images/f8b8f97f04aedd5626e07131491148d17b5a1dfda6660124f08e2a4b3d299370.png" />
+<img alt="../_images/37d638c47ef1c7edd01e00b0d9b46341d6ff7a0ac3f05a1cf166116f32114b1f.png" src="../_images/37d638c47ef1c7edd01e00b0d9b46341d6ff7a0ac3f05a1cf166116f32114b1f.png" />
+</div>
+</div>
+<p>We can extract a signal in some location:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="s2">&quot;ux uy phi&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+    <span class="n">xyplanes</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8c6cba68dcd280260a509fd2c07dfb7ffdb2c5ce3c727c451be6c40a95b54b14.png" src="../_images/8c6cba68dcd280260a509fd2c07dfb7ffdb2c5ce3c727c451be6c40a95b54b14.png" />
+<img alt="../_images/0fd158cb28cff2c7d6aa75d7f2d5e838c4eca58e46647436f5facb8a18e52af1.png" src="../_images/0fd158cb28cff2c7d6aa75d7f2d5e838c4eca58e46647436f5facb8a18e52af1.png" />
+<img alt="../_images/f3fb5bb1cea8376f313b2198e1694e324a0cb5a1c3df096cf87416dfb8fdb176.png" src="../_images/f3fb5bb1cea8376f313b2198e1694e324a0cb5a1c3df096cf87416dfb8fdb176.png" />
+</div>
+</div>
+<p>and we can go back to <code class="docutils literal notranslate"><span class="pre">ds</span></code> and plot some variables for all cases at reference times:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="s2">&quot;U Fr mixing utau&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+    <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">selected_times</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/11c38762567ef3ce9990785d29f7ecd9518cb7b0329e292c9af8ac87cbb1be83.png" src="../_images/11c38762567ef3ce9990785d29f7ecd9518cb7b0329e292c9af8ac87cbb1be83.png" />
+<img alt="../_images/5bce6691050dcb837f4130dfc50c25825980349bf902e52cd06a20c2717fcf6a.png" src="../_images/5bce6691050dcb837f4130dfc50c25825980349bf902e52cd06a20c2717fcf6a.png" />
+<img alt="../_images/2441470a3dede3597f0b60d6fe5fc76c21f8facb533495d0a0ffbc11530e2c66.png" src="../_images/2441470a3dede3597f0b60d6fe5fc76c21f8facb533495d0a0ffbc11530e2c66.png" />
+<img alt="../_images/30942ece0b2061019de93f96349e759e326d7ce4ac96eab598eb3d3717d5803a.png" src="../_images/30942ece0b2061019de93f96349e759e326d7ce4ac96eab598eb3d3717d5803a.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00-LA-and-Convert-to-NetCDF.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Layer-Averaged Quantities and Conversion to NetCDF</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../running/solver.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Navier-Stokes Solver</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-averaged-quantities">Layer-averaged quantities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other">Other</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-evolution">Flow evolution</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Felipe N. Schuch, Eckart Meiburg & Jorge H. Silvestrini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

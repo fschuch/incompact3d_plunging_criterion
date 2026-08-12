@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Governing Equations &#8212; Plunging condition for particle-laden flows over sloping bottoms</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7b8bda07" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'methodology/governing-equations';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Computational Domain" href="computational-domain.html" />
+    <link rel="prev" title="Plunging condition for particle-laden flows over sloping bottoms" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Plunging condition for particle-laden flows over sloping bottoms - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Plunging condition for particle-laden flows over sloping bottoms - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://doi.org/10.1016/j.cageo.2021.104880" title="Article" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://zenodo.org/badge/DOI/10.1016/j.cageo.2021.104880.svg" class="icon-link-image" alt="Article"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://doi.org/10.5281/zenodo.4044388" title="Dataset" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4044388.svg" class="icon-link-image" alt="Dataset"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Methodology</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Governing Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computational-domain.html">Computational Domain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical-methods.html">Numerical Methodology</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dataset</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../dataset/description.html">Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/00-LA-and-Convert-to-NetCDF.html">Layer-Averaged Quantities and Conversion to NetCDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/01-Computing-and-Plotting.html">Computing and Plotting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Running the Solver</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../running/solver.html">Navier-Stokes Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/containers.html">Containers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../references/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/building-the-docs.html">Building these Docs</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/methodology/governing-equations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Governing Equations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="governing-equations">
+<h1>Governing Equations<a class="headerlink" href="#governing-equations" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The methodology chapters are adapted from the PhD thesis of
+<span class="bibtex-citation" id="id1">Schuch [<a class="reference internal" href="../references/bibliography.html#id16" title="Felipe Nornberg Schuch. Análise do mergulho de escoamentos hiperpicnais em canal inclinado por meio de simulação numérica de grandes escalas. PhD thesis, Programa de Pós-Graduação em Engenharia e Tecnologia de Materiais, Escola Politécnica, Pontifícia Universidade Católica do Rio Grande do Sul, Porto Alegre, Brazil, March 2020. In Portuguese. English title: “Analysis of Hyperpycnal Plumes on Tilted Bed by Large-Eddy Simulation”. Advisor: J. H. Silvestrini. URL: https://tede2.pucrs.br/tede2/handle/tede/9463.">2020</a>]</span>, which describes the numerical framework
+employed in the article <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references/bibliography.html#id15" title="Felipe N. Schuch, Eckart Meiburg, and Jorge H. Silvestrini. Plunging criterion for particle-laden flows over sloping bottoms: three-dimensional turbulence-resolving simulations. Computers &amp; Geosciences, 156:104880, 2021. doi:10.1016/j.cageo.2021.104880.">Schuch <em>et al.</em>, 2021</a>]</span>.</p>
+</div>
+<p>The present framework is based on the resolution of the incompressible
+Navier-Stokes equations. <span class="math notranslate nohighlight">\(N\)</span> scalar transport equations under the
+Boussinesq approximation are used for sediments with different grain
+sizes. The incompressible Navier-Stokes equations are written in their
+dimensionless form as</p>
+<div class="math notranslate nohighlight" id="equation-eq-continuity">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-continuity" title="Link to this equation">#</a></span>\[\frac{\partial u_j}{\partial x_j} = 0,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-ns">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-ns" title="Link to this equation">#</a></span>\[\frac{\partial u_i}{\partial t}
++ u_j \frac{\partial u_i}{\partial x_j}
+= - \frac{\partial p}{\partial x_i}
++ \frac{1}{Re} \frac{\partial^2 u_i}{\partial x_j \partial x_j}
++ e^g_i \frac{1}{{Fr_0}^2} \sum_{\ell=1}^N c_\ell,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-scalar-transport">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-scalar-transport" title="Link to this equation">#</a></span>\[\frac{\partial c_\ell}{\partial t}
++ \left( u_j + u_{s,\ell}\, e^g_j \right)
+\frac{\partial c_\ell}{\partial x_j}
+= \frac{1}{Re\, Sc} \frac{\partial^2 c_\ell}{\partial x_j \partial x_j},
+\quad \ell = 1, \dots, N,\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_i\)</span>, <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(c\)</span> correspond to velocity, pressure and portion
+of each particle size, respectively, together with the coordinate
+system <span class="math notranslate nohighlight">\(x_i\)</span> (see the <a class="reference internal" href="computational-domain.html"><span class="std std-doc">computational domain</span></a>),
+time <span class="math notranslate nohighlight">\(t\)</span>, and the unit vector pointing in the gravity direction
+<span class="math notranslate nohighlight">\(e^g = [0, 1, 0]\)</span>. The settling velocity for each particle size is
+<span class="math notranslate nohighlight">\(u_s\)</span> and may be considered constant. It is related to the particle
+diameter by the Stokes settling velocity law <span class="bibtex-citation" id="id3">[<a class="reference internal" href="../references/bibliography.html#id14" title="P Y Julien. Erosion and sedimentation. Cambridge University Press, Cambrige, Reino Unido, 1998.">Julien, 1998</a>]</span>, which
+assumes that the dominant flow force on an individual particle is the
+Stokes drag.</p>
+<p>The Reynolds, densimetric Froude and Schmidt numbers at the inlet and
+the Stokes settling velocity are the four dimensionless parameters,
+defined as follows:</p>
+<div class="math notranslate nohighlight" id="equation-eq-dimensionless-parameters">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-dimensionless-parameters" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
+Re &amp;= \dfrac{\tilde{Q}_0}{\tilde{\nu}}, \\
+Fr &amp;= \dfrac{\tilde{Q}_0}{\sqrt{R \tilde{C}_0 \tilde{g} \tilde{h}_0^3}}, \\
+Sc &amp;= \dfrac{\tilde{\nu}}{\tilde{D}}, \\
+u_{s,\ell} &amp;= \dfrac{\tilde{u}_{s,\ell} \tilde{h}_0}{\tilde{Q}_0}
+            = \dfrac{\tilde{d}_{s,\ell}^2 R \tilde{g} \tilde{h}_0}
+                    {18 \tilde{\nu} \tilde{Q}_0},
+\quad \ell = 1, \dots, N,
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{\cdot}\)</span> corresponds to dimensional quantities.
+<span class="math notranslate nohighlight">\(\tilde{Q}_0\)</span> is the volumetric discharge per unit width, defined as
+the product of the inlet velocity <span class="math notranslate nohighlight">\(\tilde{U}_0\)</span> with the initial depth
+<span class="math notranslate nohighlight">\(\tilde{h}_0\)</span>. The kinematic viscosity is <span class="math notranslate nohighlight">\(\tilde{\nu}\)</span>; the fresh
+water and sediment densities are <span class="math notranslate nohighlight">\(\tilde{\rho}_w\)</span> and
+<span class="math notranslate nohighlight">\(\tilde{\rho}_s\)</span>, with <span class="math notranslate nohighlight">\(R\)</span> defined as
+<span class="math notranslate nohighlight">\((\tilde{\rho}_s - \tilde{\rho}_w)/\tilde{\rho}_w\)</span>. The gravity
+acceleration is <span class="math notranslate nohighlight">\(\tilde{g}\)</span>, the constant diffusivity of particle
+concentration is <span class="math notranslate nohighlight">\(\tilde{D}\)</span> and the grain size is <span class="math notranslate nohighlight">\(\tilde{d}_\ell\)</span>.</p>
+<p>All parameters and variables are made dimensionless using the influx
+velocity <span class="math notranslate nohighlight">\(\tilde{U}_0\)</span>, depth <span class="math notranslate nohighlight">\(\tilde{h}_0\)</span> and sediment concentration
+<span class="math notranslate nohighlight">\(\tilde{C}_0\)</span> (the associated dimensionless parameters are <span class="math notranslate nohighlight">\(h_0\)</span>,
+<span class="math notranslate nohighlight">\(U_0\)</span> and <span class="math notranslate nohighlight">\(C_0\)</span>).</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./methodology"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Plunging condition for particle-laden flows over sloping bottoms</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="computational-domain.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Computational Domain</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Felipe N. Schuch, Eckart Meiburg & Jorge H. Silvestrini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

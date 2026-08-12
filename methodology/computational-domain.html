@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Computational Domain &#8212; Plunging condition for particle-laden flows over sloping bottoms</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7b8bda07" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'methodology/computational-domain';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Numerical Methodology" href="numerical-methods.html" />
+    <link rel="prev" title="Governing Equations" href="governing-equations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Plunging condition for particle-laden flows over sloping bottoms - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Plunging condition for particle-laden flows over sloping bottoms - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://doi.org/10.1016/j.cageo.2021.104880" title="Article" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://zenodo.org/badge/DOI/10.1016/j.cageo.2021.104880.svg" class="icon-link-image" alt="Article"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://doi.org/10.5281/zenodo.4044388" title="Dataset" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4044388.svg" class="icon-link-image" alt="Dataset"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Methodology</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="governing-equations.html">Governing Equations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Computational Domain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical-methods.html">Numerical Methodology</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dataset</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../dataset/description.html">Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/00-LA-and-Convert-to-NetCDF.html">Layer-Averaged Quantities and Conversion to NetCDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/01-Computing-and-Plotting.html">Computing and Plotting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Running the Solver</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../running/solver.html">Navier-Stokes Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running/containers.html">Containers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../references/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references/building-the-docs.html">Building these Docs</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/methodology/computational-domain.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Computational Domain</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-dimensions">Domain dimensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sponge-zones">Sponge zones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-condition">Initial condition</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="computational-domain">
+<h1>Computational Domain<a class="headerlink" href="#computational-domain" title="Link to this heading">#</a></h1>
+<p>The computational setup, presented in <a class="reference internal" href="#fig-config"><span class="std std-numref">Fig. 1</span></a> and
+adapted from <span class="bibtex-citation" id="id1">Schuch [<a class="reference internal" href="../references/bibliography.html#id16" title="Felipe Nornberg Schuch. Análise do mergulho de escoamentos hiperpicnais em canal inclinado por meio de simulação numérica de grandes escalas. PhD thesis, Programa de Pós-Graduação em Engenharia e Tecnologia de Materiais, Escola Politécnica, Pontifícia Universidade Católica do Rio Grande do Sul, Porto Alegre, Brazil, March 2020. In Portuguese. English title: “Analysis of Hyperpycnal Plumes on Tilted Bed by Large-Eddy Simulation”. Advisor: J. H. Silvestrini. URL: https://tede2.pucrs.br/tede2/handle/tede/9463.">2020</a>]</span>, is based on the previous work
+of <span class="bibtex-citation" id="id2">Schuch <em>et al.</em> [<a class="reference internal" href="../references/bibliography.html#id2" title="F. N. Schuch, L. C. Pinto, J. H. Silvestrini, and S. Laizet. Three-dimensional turbulence-resolving simulations of the plunge phenomenon in a tilted channel. Journal of Geophysical Research: Oceans, 123:1–13, 2018.">2018</a>]</span>, however, a few improvements are
+proposed. The test section (TS) is the region where
+the flow is analyzed. The bed slope <span class="math notranslate nohighlight">\(S\)</span> is included in the
+computational domain via an immersed boundary method (IBM), following
+the alternating direction forcing strategy proposed by
+<span class="bibtex-citation" id="id3">Gautier <em>et al.</em> [<a class="reference internal" href="../references/bibliography.html#id3" title="Rémi Gautier, Sylvain Laizet, and Eric Lamballais. A DNS study of jet control with microjets using an immersed boundary method. International Journal of Computational Fluid Dynamics, 28(6-10):393–410, 2014.">2014</a>]</span>.</p>
+<figure class="align-default" id="fig-config">
+<a class="reference internal image-reference" href="../_images/plunge-config.svg"><img alt="../_images/plunge-config.svg" src="../_images/plunge-config.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Schematic representation of the computational domain (not to scale).
+Spanwise coordinate <span class="math notranslate nohighlight">\(x_3\)</span> is perpendicular to the plane. It is divided
+in four sections: in gray, the tilted bed is inserted by the immersed
+boundary method (IBM); TS represents the test section, where the flow
+is analyzed; SZ<span class="math notranslate nohighlight">\(_a\)</span> represents the sponge zone upstream of TS, it
+provides a turbulent inflow; SZ<span class="math notranslate nohighlight">\(_b\)</span> represents the sponge zone
+downstream of TS, employed in order to damp the turbulence level and
+avoid reflections from the outflow boundary. The two coefficients
+<span class="math notranslate nohighlight">\(\sigma_{abu}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{abc}\)</span>, that are employed at SZ<span class="math notranslate nohighlight">\(_b\)</span>, are
+shown for reference.</span><a class="headerlink" href="#fig-config" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="domain-dimensions">
+<h2>Domain dimensions<a class="headerlink" href="#domain-dimensions" title="Link to this heading">#</a></h2>
+<p>The streamwise extent of the domain is fixed for all cases:
+the recycling sponge zone SZ<span class="math notranslate nohighlight">\(_a\)</span> has length <span class="math notranslate nohighlight">\(L_{1a} = 25\)</span>, the test
+section spans <span class="math notranslate nohighlight">\(0 \leq x_1 \leq L_1 = 250\)</span> and the outflow sponge zone
+SZ<span class="math notranslate nohighlight">\(_b\)</span> has length <span class="math notranslate nohighlight">\(L_{1b} = 62.5\)</span>, discretized with <span class="math notranslate nohighlight">\(n_1 = 1081\)</span> mesh
+points. The bed becomes flat at <span class="math notranslate nohighlight">\(x_1 = 297.5\)</span>, upstream of the outflow
+boundary (dashed line in <a class="reference internal" href="#fig-dimensions"><span class="std std-numref">Fig. 2</span></a>).</p>
+<p>The vertical extent, on the other hand, depends on the bed slope <span class="math notranslate nohighlight">\(S\)</span>:
+the domain must be tall enough to contain the initial depth <span class="math notranslate nohighlight">\(h_0 = 1\)</span>,
+the total drop of the ramp, and a bottom layer of thickness <span class="math notranslate nohighlight">\(L_{2b}\)</span>
+underneath it (inserted by the IBM). With a uniform vertical mesh
+spacing <span class="math notranslate nohighlight">\(\Delta x_2 = 0.140625\)</span>, the number of points <span class="math notranslate nohighlight">\(n_2\)</span> is the
+smallest value supported by the solver’s mesh that fits these
+constraints:</p>
+<figure class="align-default" id="fig-dimensions">
+<a class="reference internal image-reference" href="../_images/domain-dimensions.svg"><img alt="../_images/domain-dimensions.svg" src="../_images/domain-dimensions.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Bed position for each simulated bed slope <span class="math notranslate nohighlight">\(S\)</span>, in the frame of
+reference of the nondeformable free surface (<span class="math notranslate nohighlight">\(x_2 = 0\)</span>). The resulting
+domain height <span class="math notranslate nohighlight">\(L_2 + L_{2b}\)</span> for each case is marked on the right
+axis. The figure is generated by
+<a class="reference external" href="https://github.com/fschuch/incompact3d_plunging_criterion/blob/main/docs/methodology/figures/domain_dimensions.py"><code class="docutils literal notranslate"><span class="pre">domain_dimensions.py</span></code></a>,
+adapted from the original script used in the thesis of
+<span class="bibtex-citation" id="id4">Schuch [<a class="reference internal" href="../references/bibliography.html#id16" title="Felipe Nornberg Schuch. Análise do mergulho de escoamentos hiperpicnais em canal inclinado por meio de simulação numérica de grandes escalas. PhD thesis, Programa de Pós-Graduação em Engenharia e Tecnologia de Materiais, Escola Politécnica, Pontifícia Universidade Católica do Rio Grande do Sul, Porto Alegre, Brazil, March 2020. In Portuguese. English title: “Analysis of Hyperpycnal Plumes on Tilted Bed by Large-Eddy Simulation”. Advisor: J. H. Silvestrini. URL: https://tede2.pucrs.br/tede2/handle/tede/9463.">2020</a>]</span>.</span><a class="headerlink" href="#fig-dimensions" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(S\)</span> [%]</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(L_2\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(L_{2b}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(n_2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.25</p></td>
+<td><p>4.71875</p></td>
+<td><p>2.03125</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.5</p></td>
+<td><p>8.4375</p></td>
+<td><p>1.6875</p></td>
+<td><p>73</p></td>
+</tr>
+<tr class="row-even"><td><p>5.0</p></td>
+<td><p>15.875</p></td>
+<td><p>1.0</p></td>
+<td><p>121</p></td>
+</tr>
+<tr class="row-odd"><td><p>10.0</p></td>
+<td><p>30.75</p></td>
+<td><p>3.0</p></td>
+<td><p>241</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="sponge-zones">
+<h2>Sponge zones<a class="headerlink" href="#sponge-zones" title="Link to this heading">#</a></h2>
+<p>Two sponge zones are employed for different reasons. Firstly, SZ<span class="math notranslate nohighlight">\(_a\)</span>
+is located upstream of the test section in order to provide a
+turbulent inflow condition by means of a recycling technique. It
+eliminates problems with transition to turbulence and the
+re-circulation bubble near the inlet. To this end, the inflow boundary
+condition (where <span class="math notranslate nohighlight">\(x_1 = -L_{1a}\)</span>) for the velocity field is defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-inflow-v">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-inflow-v" title="Link to this equation">#</a></span>\[u_i(-L_{1a}, x_2, x_3) = u_i(-L_{1a}^*, x_2, x_3).\]</div>
+<p>Furthermore, a forcing term is designed to compensate the viscous
+dissipation and maintain a constant flow rate at the recycling zone.
+It is added to the right-hand side of the momentum equation
+<a class="reference internal" href="governing-equations.html#equation-eq-ns">(2)</a> and written as</p>
+<div class="math notranslate nohighlight" id="equation-eq-sza-forcing">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-sza-forcing" title="Link to this equation">#</a></span>\[\begin{split}f_{i,sza}(x_i) =
+\begin{cases}
+u_1 \left( \dfrac{V_{sza}}{\int_{V_{sza}} u_1 \, dV} - 1 \right)
+\delta_{i1} &amp; \text{if } x_1 \leq 0, \\
+0 &amp; \text{otherwise},
+\end{cases}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V_{sza}\)</span> is the volume comprehended by sponge zone A.</p>
+<p>Secondly, SZ<span class="math notranslate nohighlight">\(_b\)</span> applies near the outflow boundary an intrinsic
+profile for the streamwise velocity <span class="math notranslate nohighlight">\(u_1(x_i)\)</span>, in order to vanish
+turbulence levels. As suggested by <span class="bibtex-citation" id="id5">Henniger <em>et al.</em> [<a class="reference internal" href="../references/bibliography.html#id4" title="R. Henniger, L. Kleiser, and E. Meiburg. Direct numerical simulations of particle transport in a model estuary. Journal of Turbulence, 11(11):N39, 2010. doi:10.1080/14685248.2010.516257.">2010</a>]</span>, the
+numerical domain should be long enough to promote the deposition of
+the entire suspended material, however, that is very computationally
+demanding. Following <span class="bibtex-citation" id="id6">Schuch <em>et al.</em> [<a class="reference internal" href="../references/bibliography.html#id2" title="F. N. Schuch, L. C. Pinto, J. H. Silvestrini, and S. Laizet. Three-dimensional turbulence-resolving simulations of the plunge phenomenon in a tilted channel. Journal of Geophysical Research: Oceans, 123:1–13, 2018.">2018</a>]</span>, an absorption
+coefficient is defined in order to remove suspended concentration
+upstream of the outlet, significantly decreasing computational costs.</p>
+<p>Three hyperbolic tangent functions are defined in order to guarantee a
+smooth transition near the outflow boundary. A transition in time
+<span class="math notranslate nohighlight">\(\sigma_{abt}\)</span> is defined as a function of the time when the front
+reaches the outlet <span class="math notranslate nohighlight">\(t_{ab}\)</span> and the size of the time window used for
+the moving time average <span class="math notranslate nohighlight">\(t_{size} = 3{,}000 \Delta t\)</span>. As a
+consequence, SZ<span class="math notranslate nohighlight">\(_b\)</span> only takes place after the front leaves the
+computational domain and the flow is in a quasi-steady state. Then,
+two spatial coefficients, <span class="math notranslate nohighlight">\(\sigma_{abu}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{abc}\)</span>, are used
+for streamwise velocity and particle concentration, respectively.
+They are written as</p>
+<div class="math notranslate nohighlight" id="equation-eq-sponge-zone">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-sponge-zone" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
+\sigma_{abt}(t)   &amp;= \dfrac{1}{2}
+  \left[ 1 + \tanh(t - t_{ab} - 2 t_{size}) \right], \\
+\sigma_{abu}(x_1) &amp;= \dfrac{1}{2}
+  \left[ 1 + \tanh(x_1 - L_1 - L_{1b} + 3h) \right], \\
+\sigma_{abc}(x_1) &amp;= \dfrac{1}{2}
+  \left[ 1 + \tanh(x_1 - L_1 - L_{1b} + 1h) \right],
+\end{align}\end{split}\]</div>
+<p>besides that, they are schematically presented in
+<a class="reference internal" href="#fig-config"><span class="std std-numref">Fig. 1</span></a>. In order to impose SZ<span class="math notranslate nohighlight">\(_b\)</span> into the governing
+equations, two forcing terms are defined, one for the streamwise
+velocity <span class="math notranslate nohighlight">\(f_{abu}\)</span> and another for the suspended concentration
+<span class="math notranslate nohighlight">\(f_{abc}\)</span>. They are written as</p>
+<div class="math notranslate nohighlight" id="equation-eq-szb-forcing">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-szb-forcing" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
+f_{i,abu}(x_i,t) &amp;= \sigma_{abt}(t)\, \sigma_{abu}(x_1)
+  \left[ u_1^*(x_2) - u_1(x_i) \right] \delta_{1i}, \\
+f_{abc}(x_i,t)   &amp;= - \sigma_{abt}(t)\, \sigma_{abc}(x_1)\, c(x_i),
+\end{align}\end{split}\]</div>
+<p>and respectively added to the right-hand side of the momentum equation
+<a class="reference internal" href="governing-equations.html#equation-eq-ns">(2)</a> and the scalar transport equation
+<a class="reference internal" href="governing-equations.html#equation-eq-scalar-transport">(3)</a>. The vertical streamwise velocity profile
+<span class="math notranslate nohighlight">\(u_1^*(x_2)\)</span> is obtained by means of a spanwise average and a moving
+average in time at a reference position, upstream of the outflow
+boundary.</p>
+</section>
+<section id="boundary-conditions">
+<h2>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h2>
+<p>A nondeformable water surface is assumed for the top boundary
+condition (where <span class="math notranslate nohighlight">\(x_2 = 0\)</span>), which is described by a no-flux condition
+for the particle concentration and a free-slip condition for the
+velocity field, following <span class="bibtex-citation" id="id7">Nasr-Azadani <em>et al.</em> [<a class="reference internal" href="../references/bibliography.html#id5" title="M. M. Nasr-Azadani, B. Hall, and E. Meiburg. Polydisperse turbidity currents propagating over complex topography: Comparison of experimental and depth-resolved simulation results. Computers and Geosciences., 53(1998):141–153, 2013. doi:10.1016/j.cageo.2011.08.030.">2013</a>]</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-top-bc-scalar">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-top-bc-scalar" title="Link to this equation">#</a></span>\[\frac{1}{Re\, Sc} \frac{\partial c(x_1, 0, x_3)}{\partial x_2}
++ e^g_2\, u_s\, c(x_1, 0, x_3) = 0,\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-top-bc-velocity">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-top-bc-velocity" title="Link to this equation">#</a></span>\[\left[
+\dfrac{\partial u_1(x_1, 0, x_3)}{\partial x_2},\;
+u_2(x_1, 0, x_3),\;
+\dfrac{\partial u_3(x_1, 0, x_3)}{\partial x_2}
+\right] = [0, 0, 0].\]</div>
+<p>At the solid-fluid interface <span class="math notranslate nohighlight">\(x_{2r}\)</span>, a convective outflow condition
+reproduces the particle deposition <span class="bibtex-citation" id="id8">[<a class="reference internal" href="../references/bibliography.html#id6" title="Frieder Necker, C Härtel, L Kleiser, and E Meiburg. High-resolution simulations of particle-driven gravity currents. International Journal of Multiphase Flow, 28(2):279–300, 2002.">Necker <em>et al.</em>, 2002</a>]</span> and a
+no-slip condition is used for the carrier fluid:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bottom">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-bottom" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
+\dfrac{\partial c(x_1, x_{2r}, x_3)}{\partial t}
++ e^g_2\, u_s
+\dfrac{\partial c(x_1, x_{2r}, x_3)}{\partial x_2} &amp;= 0, \\
+u_i(x_1, x_{2r}, x_3) &amp;= [0, 0, 0].
+\end{align}\end{split}\]</div>
+<p>The inflow condition for the velocity field was defined in Equation
+<a class="reference internal" href="#equation-eq-inflow-v">(5)</a>. Besides that, a vertical concentration profile is
+proposed</p>
+<div class="math notranslate nohighlight" id="equation-eq-inflow-profile">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-inflow-profile" title="Link to this equation">#</a></span>\[I(x_2) = \frac{1}{2}
+\left( 1 - \tanh\left( 2\, Re\, Sc\, u_s (x_2 - 1) \right) \right),\]</div>
+<p>notice that it is in agreement with the top boundary condition for the
+scalar field <a class="reference internal" href="#equation-eq-top-bc-scalar">(9)</a>. It is then normalized and applied
+to the entire recycling zone (SZ<span class="math notranslate nohighlight">\(_a\)</span>, where <span class="math notranslate nohighlight">\(x_1 &lt; 0\)</span>), as follows</p>
+<div class="math notranslate nohighlight" id="equation-eq-inflow-concentration">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-inflow-concentration" title="Link to this equation">#</a></span>\[c(x_1 &lt; 0, x_2, x_3) = I(x_2) + 1
+- \dfrac{1}{h} \left( \int_0^h I(x_2)\, dx_2 \right).\]</div>
+<p>Regular 1-D convection equations are employed at the outflow boundary
+(<span class="math notranslate nohighlight">\(x_1 = L_1 + L_{1b}\)</span>) for the scalar and for the velocity</p>
+<div class="math notranslate nohighlight" id="equation-eq-outflow">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-outflow" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
+\dfrac{\partial c(L_1 + L_{1b}, x_2, x_3)}{\partial t}
++ U_c \dfrac{\partial c(L_1 + L_{1b}, x_2, x_3)}{\partial x_1} &amp;= 0, \\
+\dfrac{\partial u_i(L_1 + L_{1b}, x_2, x_3)}{\partial t}
++ U_c \dfrac{\partial u_i(L_1 + L_{1b}, x_2, x_3)}{\partial x_j} &amp;= 0.
+\end{align}\end{split}\]</div>
+<p>Notice that the convective equations are only relevant during the
+transient part of the simulation, while <span class="math notranslate nohighlight">\(\sigma_{abt} &lt; 1\)</span>, from
+<a class="reference internal" href="#equation-eq-sponge-zone">(7)</a>. A periodic boundary condition is assumed for
+concentration and velocity in the spanwise direction</p>
+<div class="math notranslate nohighlight" id="equation-eq-periodic">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-periodic" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
+c(x_1, x_2, 0)   &amp;= c(x_1, x_2, L_3), \\
+u_i(x_1, x_2, 0) &amp;= u_i(x_1, x_2, L_3).
+\end{align}\end{split}\]</div>
+</section>
+<section id="initial-condition">
+<h2>Initial condition<a class="headerlink" href="#initial-condition" title="Link to this heading">#</a></h2>
+<p>For the initial condition (when <span class="math notranslate nohighlight">\(t = 0\)</span>) the domain is defined as
+fresh water (<span class="math notranslate nohighlight">\(c = 0\)</span>) at rest (<span class="math notranslate nohighlight">\(u_i = 0\)</span>). However, in order to
+implement the recycling technique, the velocity field is initialized
+at SZ<span class="math notranslate nohighlight">\(_a\)</span> (where <span class="math notranslate nohighlight">\(x_1 \leq 0\)</span> and <span class="math notranslate nohighlight">\(x_2 \leq h\)</span>) with white noise (1%
+of amplitude), in addition to a vertical profile for the streamwise
+velocity</p>
+<div class="math notranslate nohighlight" id="equation-eq-initial-profile">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-initial-profile" title="Link to this equation">#</a></span>\[u_1(x_1 \leq 0, x_2 \leq h, x_3) =
+\tanh \left( \frac{\sqrt{\pi}}{0.01} \left[ x_2 - h \right] \right).\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./methodology"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="governing-equations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Governing Equations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="numerical-methods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Numerical Methodology</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-dimensions">Domain dimensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sponge-zones">Sponge zones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-condition">Initial condition</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Felipe N. Schuch, Eckart Meiburg & Jorge H. Silvestrini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
