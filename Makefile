@@ -4,7 +4,7 @@
 
 MPI_RANKS ?= 2
 
-.PHONY: all solver sif smoke-test clean
+.PHONY: all solver sif smoke-test docs docs-serve clean
 
 all: solver
 
@@ -29,6 +29,16 @@ smoke-test: incompact3d.sif
 	cd smoke-test-run && apptainer exec --unsquash ../incompact3d.sif \
 		mpirun -np $(MPI_RANKS) incompact3d -i BC-Plumes.prm
 
+# Build the documentation into docs/_build/html. Dependencies are managed
+# by uv (https://docs.astral.sh/uv/), pinned by docs/uv.lock for
+# reproducibility; the environment lives in docs/.venv.
+docs:
+	uv run --project docs --frozen jupyter-book build docs
+
+# Live-reloading preview of the documentation
+docs-serve: docs
+	uv run --project docs --frozen sphinx-autobuild docs docs/_build/html --open-browser
+
 clean:
 	$(MAKE) -C incompact3d clean
-	rm -rf incompact3d.sif smoke-test-run
+	rm -rf incompact3d.sif smoke-test-run docs/_build

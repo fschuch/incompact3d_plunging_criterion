@@ -1,0 +1,24 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Methodology
+    chapters:
+      - file: methodology/governing-equations.md
+      - file: methodology/computational-domain.md
+      - file: methodology/numerical-methods.md
+  - caption: Dataset
+    chapters:
+      - file: dataset/description.md
+      - file: examples/00-LA-and-Convert-to-NetCDF.ipynb
+      - file: examples/01-Computing-and-Plotting.ipynb
+  - caption: Running the Solver
+    chapters:
+      - file: running/solver.md
+      - file: running/containers.md
+  - caption: References
+    chapters:
+      - file: references/bibliography.md
+      - file: references/building-the-docs.md

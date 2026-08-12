@@ -1,0 +1,3 @@
+# Documentation build output and uv-managed environment
+_build/
+.venv/
