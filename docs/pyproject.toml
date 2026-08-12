@@ -1,0 +1,17 @@
+[project]
+name = "plunging-criterion-docs"
+description = "Documentation for the plunging-criterion companion repository, built with Jupyter Book."
+version = "1.0.0"
+requires-python = ">=3.12"
+authors = [{ name = "Felipe N. Schuch", email = "me@fschuch.com" }]
+dependencies = [
+    "docutils==0.21.2",
+    "jupyter-book==1.0.4.post1",
+    "sphinx==7.4.7",
+    "sphinx-autobuild==2024.10.3",
+]
+
+[tool.uv]
+# This project only manages the documentation environment,
+# there is no package to build or install.
+package = false

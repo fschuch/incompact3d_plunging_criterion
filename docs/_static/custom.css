@@ -1,0 +1,6 @@
+/* The theme ships two search entry points: a field below the logo in the
+   sidebar and a magnifier button in the article header. Keep only the
+   sidebar one. */
+.article-header-buttons .search-button__button {
+  display: none;
+}

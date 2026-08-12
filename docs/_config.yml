@@ -1,0 +1,69 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Plunging condition for particle-laden flows over sloping bottoms
+author: Felipe N. Schuch, Eckart Meiburg & Jorge H. Silvestrini
+copyright: "2021"
+description: >-
+  Companion material for "Plunging condition for particle-laden flows over
+  sloping bottoms: three-dimensional turbulence-resolving simulations"
+  (Computers & Geosciences, 2021).
+# Volume rendering of the plunging flow (case 5.0-30), cropped from the
+# thesis of F. N. Schuch (Figure 1a)
+logo: logo.png
+
+# The notebooks in this book are shipped with their outputs already stored,
+# since the dataset they depend on is not included in the repository
+# (it is available on Zenodo). Never execute them at build time.
+execute:
+  execute_notebooks: "off"
+
+parse:
+  myst_enable_extensions:
+    - amsmath
+    - dollarmath
+    - colon_fence
+    - linkify
+    - substitution
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/fschuch/incompact3d_plunging_criterion
+  path_to_book: docs
+  branch: main
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  home_page_in_navbar: false
+  use_edit_page_button: true
+  use_issues_button: true
+  use_repository_button: true
+
+sphinx:
+  config:
+    suppress_warnings: ["mystnb.unknown_mime_type"]
+    # The uv-managed environment lives inside the book folder (docs/.venv);
+    # keep Sphinx from scanning it (Jupyter Book's default exclude list is
+    # replaced, not extended, so restate _build here as well)
+    exclude_patterns: ["_build", ".venv", "Thumbs.db", ".DS_Store", "**.ipynb_checkpoints"]
+    bibtex_reference_style: author_year
+    html_theme_options:
+      icon_links:
+        - name: "Article"
+          url: "https://doi.org/10.1016/j.cageo.2021.104880"
+          icon: "https://zenodo.org/badge/DOI/10.1016/j.cageo.2021.104880.svg"
+          type: "url"
+        - name: "Dataset"
+          url: "https://doi.org/10.5281/zenodo.4044388"
+          icon: "https://zenodo.org/badge/DOI/10.5281/zenodo.4044388.svg"
+          type: "url"
