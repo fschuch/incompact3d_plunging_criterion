@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+/incompact3d/incompact3d
+/incompact3d/post
+
+# Containers
+*.sif
+/smoke-test-run/
+
+# Simulation Data
+/data/
+
+
+# macOS
+.DS_Store

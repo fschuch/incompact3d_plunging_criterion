@@ -66,8 +66,8 @@ itest       200
 #
 # INCOMPACT 3D File parameters
 #
-ilit    1      # Read initial flow field? (0:no, 1:yes)
-ifirst  384001 # First iteration
+ilit    0      # Read initial flow field? (0:no, 1:yes)
+ifirst  1      # First iteration
 ilast   480000 # Last iteration
 isave   32000  # Frequency for writing backup file (sauve.dat)
 imodulo 2000   # Frequency for visualization for VISU_INSTA

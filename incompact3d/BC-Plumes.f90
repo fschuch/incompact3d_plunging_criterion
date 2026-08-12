@@ -427,7 +427,8 @@ subroutine boundary_conditions (ux,uy,uz,phi1,ep1)
     i = mod(itime,sponge_nt)+1
     !
     sponge_ux1(i,:,:) = ux(nx_xref,:,:)
-    sponge_phi1(i,:,:,:) = phi1(nx_xref,:,:,:)
+    !sponge_phi1 is only allocated when sponge_type2 == 1
+    if ( sponge_type2 .eq. 1 ) sponge_phi1(i,:,:,:) = phi1(nx_xref,:,:,:)
     !
     if (ct2 .gt. zero) then
       call mean_plane_x(sponge_ux1, sponge_nt, xsize(2), xsize(3), avg_tmp)

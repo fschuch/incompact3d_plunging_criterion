@@ -1,0 +1,92 @@
+Bootstrap: docker
+From: ubuntu:24.04
+
+# Apptainer image for the Incompact3d plunging-plumes solver.
+#
+# The image bundles its own OpenMPI, so it works out of the box on a single
+# node:
+#
+#   apptainer exec incompact3d.sif mpirun -np 4 incompact3d -i BC-Plumes.prm
+#
+# For multi-node (hybrid) runs, launch with the *host* MPI instead, so the
+# host scheduler/interconnect is used. This requires a host OpenMPI that is
+# ABI-compatible with the one inside the image (same major version):
+#
+#   mpirun -np 128 apptainer exec incompact3d.sif incompact3d -i BC-Plumes.prm
+
+%files
+    incompact3d /opt/incompact3d-src
+    LICENSE /opt/incompact3d/LICENSE
+
+%post
+    set -e
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        build-essential \
+        gfortran \
+        make \
+        git \
+        openmpi-bin \
+        libopenmpi-dev \
+        ca-certificates
+    rm -rf /var/lib/apt/lists/*
+
+    cd /opt/incompact3d-src
+    # Override the Makefile's gcc FFLAGS: replace -march=native (not portable
+    # in a distributed image) with the baseline ISA of the build architecture.
+    # x86-64 is what CI publishes; other architectures (e.g. building locally
+    # on an arm64 machine) fall back to the compiler default.
+    if [ "$(uname -m)" = "x86_64" ]; then
+        ARCH_FLAGS="-march=x86-64 -mtune=generic"
+    else
+        ARCH_FLAGS=""
+    fi
+    make clean
+    make i3d_CMP=gcc i3d_FFT=generic i3d_FLOW_TYPE=Plumes \
+        FFLAGS="-cpp -O3 -funroll-loops -floop-optimize -g -Warray-bounds -fcray-pointer -fbacktrace $ARCH_FLAGS -ffree-line-length-none -fallow-argument-mismatch"
+
+    mkdir -p /opt/incompact3d/bin
+    cp incompact3d /opt/incompact3d/bin/
+    # Keep the pristine source tree in the image: the code is GPL-3.0, so the
+    # corresponding source must be conveyed along with the binary.
+    make clean
+
+%environment
+    export PATH=/opt/incompact3d/bin:$PATH
+    # Avoid CMA-based shared-memory transfers, which are often blocked inside
+    # unprivileged containers.
+    export OMPI_MCA_btl_vader_single_copy_mechanism=none
+    export OMPI_ALLOW_RUN_AS_ROOT=1
+    export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
+%runscript
+    exec incompact3d "$@"
+
+%test
+    incompact3d --help || true
+    mpirun --version
+
+%labels
+    Author Felipe N. Schuch
+    Application incompact3d (plunging plumes / plunging criterion)
+    URL https://github.com/fschuch/incompact3d_plunging_criterion
+    License GPL-3.0
+
+%help
+    Incompact3d solver for the plunging criterion study (Plumes flow type,
+    gfortran + OpenMPI, generic FFT).
+
+    Single node (container MPI):
+        apptainer exec incompact3d.sif mpirun -np 4 incompact3d -i BC-Plumes.prm
+
+    Multi node (host MPI, hybrid mode — requires host OpenMPI of the same
+    major version as the one in the image):
+        mpirun -np N apptainer exec incompact3d.sif incompact3d -i BC-Plumes.prm
+
+    The solver reads the parameter file given by -i (default BC-Plumes.prm in
+    the current directory) and writes output to -o (default ./data/), so run
+    it from a writable working directory containing your case files.
+
+    License: GPL-3.0. The corresponding source code is included in the image
+    at /opt/incompact3d-src, and the license text at /opt/incompact3d/LICENSE
+    (also /opt/incompact3d-src/LICENSE).
